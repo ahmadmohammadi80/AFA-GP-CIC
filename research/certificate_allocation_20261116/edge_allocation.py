@@ -67,12 +67,12 @@ def certificate(A,observations,N,delta):
 
 def run(trials=40,pilot=100,k=10,delta=.05,threshold=.02,seed=20261116):
     if k<5 or k>13 or pilot<1 or trials<1:raise ValueError("scenario")
-    b=np.ones(k)/k;d=np.zeros(k);d[0]=.07;d[1]=-.07;q=b+d
+    b=np.ones(k)/k;d=np.zeros(k);d[0]=.065;d[1]=-.065;d[2]=.015;d[3]=-.015;q=b+d
     H=np.eye(k)[:6]
     v=np.linspace(.12,-.10,k);v[0]=.40;v[1]=-.40
     W=v[:,None]-v[None,:]
     for i,j in ((2,3),(3,4),(4,2)):
-        W[i,j]+=.04;W[j,i]-=.04
+        W[i,j]+=.12;W[j,i]-=.12
     assert abs(W).max()<=1.
     E,A=coefficients(b,q,H)
     mu=np.array([W[i,j] for i,j in E])
