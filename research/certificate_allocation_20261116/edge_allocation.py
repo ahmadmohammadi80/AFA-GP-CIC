@@ -57,7 +57,9 @@ def design(A,B):
     total=int(N.sum())
     same=np.full(E,total//E,dtype=int);same[:total%E]+=1
     return {'optimal_counts':N,'uniform_counts':same,'continuous_cost':float(n.sum()),
-            'global_lower':float(L),'numerical_gap_upper':float(n.sum()-L)}
+            'global_lower':float(L),'numerical_gap_upper':float(n.sum()-L),
+            'uniform_required_for_same_width':int(E*np.ceil(uniform)),
+            'solver_success':bool(opt.success)}
 
 def certificate(A,observations,N,delta):
     N=np.asarray(N,int);A=np.asarray(A,float)
@@ -96,7 +98,9 @@ def run(trials=40,pilot=100,k=10,delta=.05,threshold=.02,seed=20261116):
            'uniform_certified':bool(u>threshold),
            'max_width_ours':float(c*np.max(np.abs(A)@N**(-.5))),
            'max_width_uniform':float(c*np.max(np.abs(A)@Un**(-.5))),
-           'oracle_design_lower_bound':alloc['global_lower']})
+           'oracle_design_lower_bound':alloc['global_lower'],
+           'uniform_required_for_same_width':alloc['uniform_required_for_same_width'],
+           'optimizer_success':alloc['solver_success']})
     valid=[r for r in rows if r['planned']]
     return {'model':'fixed KL candidate and opponent set, independent pilot and confirmation',
        'k':k,'opponent_count':len(H),'active_edges':len(E),'trial_count':trials,
@@ -105,6 +109,10 @@ def run(trials=40,pilot=100,k=10,delta=.05,threshold=.02,seed=20261116):
        'our_certificates':sum(r['our_certified'] for r in valid),
        'uniform_active_edge_certificates':sum(r['uniform_certified'] for r in valid),
        'average_our_width':float(np.mean([r['max_width_ours'] for r in valid])) if valid else None,
+       'mean_confirm_budget':float(np.mean([r['confirm_budget'] for r in valid])) if valid else None,
+       'mean_uniform_required_budget_for_same_target':float(np.mean([r['uniform_required_for_same_width'] for r in valid])) if valid else None,
+       'optimized_below_uniform_target_count':sum(r['confirm_budget']<r['uniform_required_for_same_width'] for r in valid),
+       'optimizer_success_count':sum(r['optimizer_success'] for r in valid),
        'average_uniform_width':float(np.mean([r['max_width_uniform'] for r in valid])) if valid else None,
        'rows':rows}
 
