@@ -1,0 +1,43 @@
+name: AFA verified numerical and finite-sample closure
+on:
+  push:
+    paths:
+      - '.github/workflows/afa-verified-closure.yml'
+      - 'research/verified_closure_20261116/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install numerical and interval packages
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy scipy mpmath
+      - name: Run all earlier finite-action regression tests
+        run: |
+          cd research/certified_completion_20261116
+          python -m unittest discover -s tests -v
+      - name: Run new rational/interval KL and explicit complexity bound tests
+        run: |
+          python -m unittest discover -s research/verified_closure_20261116 -p 'test_closure.py' -v
+      - name: Emit example high-precision certificate
+        run: |
+          PYTHONPATH=research/certified_completion_20261116:research/verified_closure_20261116 python - <<'PY'
+          import numpy as np
+          from certified_solver import solve
+          from validated_enclosures import certify
+          b=np.array([.2,.3,.5]);lo=np.array([-.5,.0,.4]);hi=lo+.02
+          z=solve(b,lo,hi,.04)
+          r=certify(b,z.q,lo,hi,.04,z.s_dual,z.eta)
+          print('KL upper:',r.kl_upper_decimal)
+          print('Dual gap upper:',r.gap_upper_decimal)
+          assert r.exact_feasible and r.optimality_tol_pass
+          PY
