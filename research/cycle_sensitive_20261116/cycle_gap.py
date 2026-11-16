@@ -30,7 +30,7 @@ def matrix(cycle_sign: int):
         w[i][j] += c
         w[j][i] -= c
     assert all(abs(w[i][j])<=1 for i in range(3) for j in range(3))
-    assert w[0][1]*w[1][2]*w[2][0]>0 # a true directed 3-cycle in either sign
+    assert (w[0][1]>0)==(w[1][2]>0)==(w[2][0]>0) # all three edges agree in sign, either orientation
     return w
 
 def score(w):
