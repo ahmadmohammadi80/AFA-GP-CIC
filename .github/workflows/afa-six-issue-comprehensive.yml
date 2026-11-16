@@ -33,6 +33,8 @@ jobs:
         run: python research/six_issues_20261116/published_baselines.py --seeds 40 --cyclic --out results/published_cyclic.json
       - name: Drift coverage on 40 adaptive paths
         run: python research/six_issues_20261116/bounded_drift.py --seeds 40 --cycles 500 --out results/drift_coverage.json
+      - name: Three nonstationary regimes with known shifts and 40 paths
+        run: python research/six_issues_20261116/change_point_reset.py --seeds 40 --epochs 3 --out results/known_changes_40.json
       - name: Proved guarded-policy performance and cyclic 2-world witness
         run: python research/six_issues_20261116/theory_and_guarantees.py --seeds 40 --out results/guarantee.json
       - name: Measure scaling and generate plot
