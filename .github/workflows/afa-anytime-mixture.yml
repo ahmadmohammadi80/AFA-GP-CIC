@@ -1,0 +1,37 @@
+name: AFA anytime beta-mixture power and all-adaptive lower bound
+on:
+  push:
+    paths:
+      - ".github/workflows/afa-anytime-mixture.yml"
+      - "research/anytime_mixture_20261116/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install numeric dependencies
+        run: python -m pip install numpy scipy
+      - name: Ten independent scientific tests
+        run: |
+          cd research/anytime_mixture_20261116
+          python -m unittest -v test_research
+      - name: Paired adaptive comparison at 1510 labels
+        run: |
+          python research/anytime_mixture_20261116/anytime_mixture.py --seeds 40 --max-labels 1510 --threshold 0.015 --out results/power.json
+      - name: Two-world universal adaptive information benchmark
+        run: |
+          python research/anytime_mixture_20261116/two_world_sequential.py --seeds 10000 --out results/two_world.json
+      - name: Upload reproducible JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afa-mixture-power-info-limit
+          path: results/*.json
+          if-no-files-found: warn
