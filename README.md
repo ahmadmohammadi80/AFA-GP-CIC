@@ -39,3 +39,21 @@ python research/full_simplex_20261116/real_llm_pilot.py --n 5000 --out real_llm.
 \`\`\`
 
 The workflow \`AFA full-simplex verification and real-LM pilot\` runs the checks on GitHub Actions and saves raw experimental JSON as a run artifact.
+
+
+## Certified algorithm / mathematical proof completion (2026-11-16)
+
+The latest finite-action implementation and proof package is in
+[`research/certified_completion_20261116/`](research/certified_completion_20261116/README_FA.md).
+
+Changes:
+- Fixed the small-sample confidence radius bug for observations in [-1,1].
+- Added a KL-feasible primal policy, a global dual upper bound, and auditable numerical optimality gaps.
+- Added a non-anticipating adaptive preference-query and stopping controller.
+- Provided five finite-action mathematical statements with proofs, independent grid verification, and regression tests.
+- Re-ran 160 synthetic cases and a **real pretrained-model / synthetic-preference-oracle** pilot.
+
+CI evidence: [AFA certified algorithm and proof verification](https://github.com/ahmadmohammadi80/AFA-GP-CIC/actions/runs/43848971749).
+It passed 23 tests, 160 synthetic trials, 16 grid audits and 12 real-model questions.
+
+**Scope:** Results are for stationary, conditionally independent finite-action pairwise preferences with a known fixed reference policy. Numerical gaps are float64 checks, not formal directed-rounding certificates. Originality relative to all previous work and validity with human preferences remain separate unverified research questions.
