@@ -1,0 +1,48 @@
+name: AFA six-issue research audit
+on:
+  push:
+    paths:
+      - ".github/workflows/afa-six-issues.yml"
+      - "research/six_issue_repair_20261116/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dependencies
+        run: python -m pip install numpy scipy matplotlib
+      - name: Verify eleven independent tests
+        run: |
+          cd research/six_issue_repair_20261116
+          python -m unittest -v test_six_issues
+      - name: Original 40-seed experiment with Holm comparisons
+        run: |
+          mkdir -p results
+          python research/six_issue_repair_20261116/baselines.py 40 > results/benchmark40_summary.json
+      - name: True sign-cycle 40-seed experiment
+        run: |
+          python -c "import sys,json;sys.path.insert(0,'research/six_issue_repair_20261116');from baselines import benchmark; r=benchmark(40,cyclic=True);open('results/benchmark40_cycle.json','w').write(json.dumps(r,indent=2));print(json.dumps({k:v for k,v in r.items() if k!='rows'},indent=2))"
+      - name: Bounded-drift coverage check, 40 three-epoch seeds
+        run: |
+          python research/six_issue_repair_20261116/drift_cert.py 40 > results/drift_summary.json
+      - name: Verify exact lookahead vectorization and render scaling plots
+        run: |
+          python research/six_issue_repair_20261116/scaling.py > results/scaling_stdout.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afa-six-issue-evidence
+          path: |
+            results/**
+            research/six_issue_repair_20261116/benchmark40.json
+            research/six_issue_repair_20261116/drift40.json
+            research/six_issue_repair_20261116/scaling.json
+            research/six_issue_repair_20261116/scaling_*.png
+          if-no-files-found: warn
