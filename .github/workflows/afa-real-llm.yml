@@ -4,6 +4,8 @@ on:
     paths:
       - '.github/workflows/afa-real-llm.yml'
       - 'research/real_llm_pilot.py'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
