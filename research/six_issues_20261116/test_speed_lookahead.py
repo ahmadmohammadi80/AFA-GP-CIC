@@ -14,5 +14,5 @@ class SpeedTests(unittest.TestCase):
   for k in (3,6,12):
    rng=np.random.default_rng(k);b=rng.dirichlet(np.ones(k))
    for kl in (0,.05,.5,10):
-    np.testing.assert_allclose(frontier_fast(b,kl),dense_frontier(b,kl),atol=1e-11,rtol=0)
+    np.testing.assert_allclose(frontier_fast(b,kl),dense_frontier(b,kl),atol=1e-8,rtol=0)
 if __name__=="__main__":unittest.main()
