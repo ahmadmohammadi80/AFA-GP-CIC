@@ -1,0 +1,23 @@
+{
+  "base_commit": "b006e332f2491d051e904aa6f54bd7939ad68e77",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "pytest": "9.2.0",
+  "tests": "15 passed",
+  "research_gate": "FAIL; not closed",
+  "files": {
+    "research/novelty_independent_20261116/PROOF_REGRET.md": "33265636b72d183724a9cbd2f3bd68f55fdfc09163c690fed5eced8155bfa798",
+    "research/novelty_independent_20261116/RESULTS_FA.md": "8c04306822fc1e23bdfe875ffebed63fd181c59c29aa07775971ab6764151195",
+    "research/novelty_independent_20261116/cswm_allocator.py": "0c2d6f3008fdcbd25ff8a049e6d2a30b485261efe5f82e9ee96202d94800a5ad",
+    "research/novelty_independent_20261116/cswm_drift_results.json": "caf08f25a6f43da6c5cdd3ddbdda35065ac75dd54fa706ef2013c52d83705714",
+    "research/novelty_independent_20261116/cswm_results.json": "8b9dc622c926025559ec251ad094ba585fb6a7317aabf749b2daf14660790735",
+    "research/novelty_independent_20261116/drift_diagnostic.py": "12c0a8fee0f50aa2cd729cf6931b212f5916e37cd375d530be8af79bc8d71946",
+    "research/novelty_independent_20261116/requirements.txt": "d63f739734d3b6104ede62a2ac8eeec5357d2870ea969189b53b6b7a93edddec",
+    "research/novelty_independent_20261116/run_experiments.py": "32f53c706659d813d22b1daf1ddf2464bafb469fd8c648791aea8a5aa25a2de1",
+    "research/novelty_independent_20261116/test_cswm.py": "0a95e87889034c0f9f08a1452ed636dfad27bbcbacee5f27704b974ee8f9a44d",
+    "research/novelty_independent_20261116/test_results.txt": "cb76e7233cbf9ad691ac82810fd476b13d60b28db5142dbaa1b1ced360db1086",
+    "research/six_issues_20261116/REPAIR_PROOFS_AND_STATUS_FA.md": "e5f1ab9becdc8318e169280b9da83d10b43680e13808055ca6c0b23bac83dc65"
+  }
+}
