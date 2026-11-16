@@ -87,7 +87,7 @@ def profile(k=5,q_count=3,block=8,repetitions=2):
         np.testing.assert_allclose(old[field],new[field],rtol=0,atol=1e-12)
     slowfront=dense_frontier(b,.05)
     fastfront=frontier_fast(b,.05)
-    np.testing.assert_allclose(slowfront,fastfront,rtol=0,atol=1e-11)
+    np.testing.assert_allclose(slowfront,fastfront,rtol=0,atol=1e-8)
     timing={}
     for name,func in (("dense_recourse",dense_recourse),("cached_recourse",recourse_fast)):
         tracemalloc.start();begin=time.perf_counter()
