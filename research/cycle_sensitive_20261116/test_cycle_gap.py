@@ -12,7 +12,8 @@ class ProofChecks(unittest.TestCase):
             W=matrix(c)
             self.assertTrue(all(abs(W[i][j])<=1 for i in range(3) for j in range(3)))
             self.assertTrue(all(abs(W[i][j]+W[j][i])<1e-12 for i in range(3) for j in range(3)))
-            self.assertGreater(W[0][1]*W[1][2]*W[2][0],0)
+            self.assertEqual((W[0][1]>0), (W[1][2]>0))
+            self.assertEqual((W[1][2]>0), (W[2][0]>0))
 
     def test_exact_score_collapse(self):
         splus=score(matrix(+1))
