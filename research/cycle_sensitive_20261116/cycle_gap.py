@@ -82,6 +82,36 @@ def predict_from_labels(wins,n):
     if n<=0 or not 0<=wins<=n:raise ValueError('invalid counts')
     return +1 if 2*wins/n-1 > .1 else -1
 
+def bernoulli_kl(p,q):
+    """KL(Bern(p) || Bern(q)), used for two-world information lower bound."""
+    if not 0<p<1 or not 0<q<1:raise ValueError('p and q must be interior')
+    return p*math.log(p/q)+(1-p)*math.log((1-p)/(1-q))
+
+def universal_adaptive_lower_bound(delta=DELTA):
+    """E_+[T] and E_-[T] lower bounds for ANY delta-correct adaptive edge
+    selection + stopping rule in the fully-known W+/W- two-world family.
+
+    Change-of-measure:
+      kl(1-delta,delta) <= E_world sum_e N_e kl(p_e^world,p_e^other)
+                           <= max_e kl(p_e^world,p_e^other) * E_world[T].
+    This grants the competitor arbitrary adaptive querying over all 3 edges.
+    """
+    if not 0<delta<.5:raise ValueError('0<delta<0.5 required')
+    plus,minus=matrix(+1),matrix(-1)
+    es=((0,1),(0,2),(1,2))
+    info_plus=max(bernoulli_kl((1+plus[i][j])/2,(1+minus[i][j])/2) for i,j in es)
+    info_minus=max(bernoulli_kl((1+minus[i][j])/2,(1+plus[i][j])/2) for i,j in es)
+    decision_kl=bernoulli_kl(1-delta,delta)
+    return {
+        'adaptive_lower_expected_plus':decision_kl/info_plus,
+        'adaptive_lower_expected_minus':decision_kl/info_minus,
+        'strongest_edge_kl_plus':info_plus,
+        'strongest_edge_kl_minus':info_minus,
+        'fixed_38_to_optimal_lower_ratio_plus':needed_labels(delta)/(decision_kl/info_plus),
+        'fixed_38_to_optimal_lower_ratio_minus':needed_labels(delta)/(decision_kl/info_minus),
+        'scope':'All adaptive edge strategies and stopping rules in the EXACT two-known-world model.'
+    }
+
 def run_trials(repeats=10000,delta=DELTA,seed=20261116):
     n=needed_labels(delta)
     out={}
@@ -103,6 +133,7 @@ def run_trials(repeats=10000,delta=DELTA,seed=20261116):
             'minus_upper_bound':no_world_upper_bound(),
             'delta':delta,'labels_for_binary_case':n,
             'per_world_error_Hoeffding_bound':math.exp(-n*0.4**2/2),
+            'adaptive_query_lower_bound':universal_adaptive_lower_bound(delta),
             'worlds':out,
             'interpretation':'Only 2 known hypotheses; not a universal unknown-W safe certificate.'}
 
