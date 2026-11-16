@@ -1,3 +1,5 @@
+> Repair audit: see [verified changes and remaining six-issue gates](research/six_issues_20261116/REPAIR_PROOFS_AND_STATUS_FA.md). The repaired generic engine is `research/six_issues_20261116/guarded_engine.py`.
+
 # AFA-GP-CIC / CA-VOI
 
 **Private research prototype**: certificate-aware active preference learning for finite-response alignment under possibly cyclic preferences.
@@ -73,3 +75,4 @@ and [mathematical proof and limitations](research/verified_closure_20261116/PROO
   model and does not imply global originality or performance with human labels.
 - Assumes the interval arithmetic library correctly encloses transcendental
   functions. This is not a separately machine-checked Lean/Coq proof.
+

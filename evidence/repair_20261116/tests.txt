@@ -1,0 +1,40 @@
+test_adaptive_simulation (test_bounded_drift.DriftTests.test_adaptive_simulation) ... ok
+test_more_drift_never_narrows (test_bounded_drift.DriftTests.test_more_drift_never_narrows) ... ok
+test_no_bad_future (test_bounded_drift.DriftTests.test_no_bad_future) ... ok
+test_vacuous_no_samples (test_bounded_drift.DriftTests.test_vacuous_no_samples) ... ok
+test_genuine_cycle_and_positive_policies (test_change_point_reset.ChangePointTests.test_genuine_cycle_and_positive_policies) ... ok
+test_reset_exactly_and_reproduce (test_change_point_reset.ChangePointTests.test_reset_exactly_and_reproduce) ... ok
+test_small (test_extended_power.ExtendedTests.test_small) ... ok
+test_small (test_guarded_holdout.GuardedHoldoutTests.test_small) ... ok
+test_audit (test_issue1_ablation.Tests.test_audit) ... ok
+test_null (test_issue1_ablation.Tests.test_null) ... ok
+test_reproducible (test_issue1_ablation.Tests.test_reproducible) ... ok
+test_holm_monotonic_order (test_multiplicity_gate.MultiplicityTests.test_holm_monotonic_order) ... ok
+test_reject_invalid (test_multiplicity_gate.MultiplicityTests.test_reject_invalid) ... ok
+test_deterministic (test_pac_bayes_iid.PBTests.test_deterministic) ... ok
+test_radius (test_pac_bayes_iid.PBTests.test_radius) ... ok
+test_valid_noncyclic_and_cyclic_smoke (test_pac_bayes_iid.PBTests.test_valid_noncyclic_and_cyclic_smoke) ... ok
+test_fast_matches_dense_all_dimensions (test_pure_opponent_fast.ScalingTests.test_fast_matches_dense_all_dimensions) ... ok
+test_invalid_interval (test_pure_opponent_fast.ScalingTests.test_invalid_interval) ... ok
+test_all_zero_influence (test_repair.RepairTests.test_all_zero_influence) ... ok
+test_budget_is_not_silently_exceeded (test_repair.RepairTests.test_budget_is_not_silently_exceeded) ... ok
+test_drift_invalidates_stale_certificates (test_repair.RepairTests.test_drift_invalidates_stale_certificates) ... ok
+test_generic_dense_incremental_identical_trajectory (test_repair.RepairTests.test_generic_dense_incremental_identical_trajectory) ... ok
+test_null_never_accepts_in_fixed_regression_paths (test_repair.RepairTests.test_null_never_accepts_in_fixed_regression_paths) ... ok
+test_rucb_does_not_promote_random_champion (test_repair.RepairTests.test_rucb_does_not_promote_random_champion) ... ok
+test_rucb_memory_has_exact_half_probability (test_repair.RepairTests.test_rucb_memory_has_exact_half_probability) ... ok
+test_tiny_budget_and_kl_validation (test_repair.RepairTests.test_tiny_budget_and_kl_validation) ... ok
+test_truth_covered_regret_certificate (test_repair.RepairTests.test_truth_covered_regret_certificate) ... ok
+test_exact_lookahead (test_speed_lookahead.SpeedTests.test_exact_lookahead) ... ok
+test_frontier (test_speed_lookahead.SpeedTests.test_frontier) ... ok
+test_exact_certificate_invariance (test_support_pruning.TestSupport.test_exact_certificate_invariance) ... ok
+test_sparse_witness (test_support_pruning.TestSupport.test_sparse_witness) ... ok
+test_explicit_sample_cap (test_theory_and_guarantees.TheoryTests.test_explicit_sample_cap) ... ok
+test_guarded_validity_and_rate (test_theory_and_guarantees.TheoryTests.test_guarded_validity_and_rate) ... ok
+test_intersection_nonempty (test_theory_and_guarantees.TheoryTests.test_intersection_nonempty) ... ok
+test_witness_is_truly_cyclic_and_separates_worlds (test_theory_and_guarantees.TheoryTests.test_witness_is_truly_cyclic_and_separates_worlds) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 1.654s
+
+OK

@@ -51,10 +51,20 @@ def choose_pair(method,wins,counts,k,t,rng,champion_memory=None):
     np.fill_diagonal(U,.5);np.fill_diagonal(L,.5)
     if method=="rucb":
         C=np.flatnonzero(np.all(U>=.5,axis=1))
-        if len(C)==0:C=np.arange(k)
-        if champion_memory is not None and champion_memory in C and rng.random()<.5:
-            c=int(champion_memory)
-        else:c=int(rng.choice(C))
+        # Algorithm 1 lines 7-11: B is the last SINGLETON candidate,
+        # not the champion drawn on the preceding round.
+        memory = champion_memory if champion_memory in C else None
+        if len(C)==0:
+            C=np.arange(k);memory=None
+            c=int(rng.choice(C))
+        elif len(C)==1:
+            c=int(C[0]);memory=c
+        elif memory is None:
+            c=int(rng.choice(C))
+        elif rng.random()<.5:
+            c=int(memory)
+        else:
+            c=int(rng.choice(C[C!=memory]))
         rivals=np.array([j for j in range(k) if j!=c])
         d=int(rng.choice(rivals[np.isclose(U[rivals,c],np.max(U[rivals,c]))]))
     else:
@@ -77,9 +87,11 @@ def choose_pair(method,wins,counts,k,t,rng,champion_memory=None):
             second[int(j)]=v if j<c else 1-v
         d=int(rng.choice([j for j in rivals if np.isclose(second[int(j)],max(second.values()))]))
     i,j=sorted((c,d))
-    return i*(2*k-i-1)//2+(j-i-1),c
+    return i*(2*k-i-1)//2+(j-i-1),(memory if method=="rucb" else None)
 
 def published_trial(seed,method="rucb",budget=1510,delta=.05,threshold=.015,cyclic=False):
+    if not isinstance(budget,int) or budget<10:raise ValueError("budget must cover the 10-label pilot")
+    if not 0<delta<1:raise ValueError("delta")
     b,Q,H,W=preference_problem(cyclic);k=len(b)
     es=list(combinations(range(k),2));E=len(es)
     means=np.array([W[i,j] for i,j in es])
@@ -142,3 +154,4 @@ if __name__=="__main__":
     a=ap.parse_args();v=compare(a.seeds,a.offset,a.cyclic)
     p=Path(a.out);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(v,indent=2))
     print(json.dumps({"setup":v["setup"],"summary":v["summary"],"paired":v["paired"]},indent=2))
+

@@ -49,6 +49,8 @@ def theoretical_sample_cap(b,Q,H,threshold,true_gains,delta=.05,explore_period=2
             "status":"valid but conservative; finite Q,H, known stationary oracle"}
 
 def guarded_joint(seed,budget=1510,cyclic=False,explore_period=20,delta=.05,threshold=.015):
+    if not isinstance(budget,int) or budget<10:raise ValueError("budget must cover the 10-label pilot")
+    if not 0<delta<1:raise ValueError("delta")
     if explore_period<2:raise ValueError("explore_period")
     b,Q,H,W=preference_problem(cyclic);k=len(b)
     edges=list(combinations(range(k),2));E=len(edges)
@@ -135,3 +137,4 @@ if __name__=="__main__":
     a=ap.parse_args();r=audit(a.seeds)
     p=Path(a.out);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=2))
     print(json.dumps({k:{a:b for a,b in v.items() if a!="rows"} if isinstance(v,dict) else v for k,v in r.items()},indent=2))
+

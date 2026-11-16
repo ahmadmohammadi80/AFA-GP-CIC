@@ -8,6 +8,8 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"anytime_mixture_20261
 from anytime_mixture import edge_cs,edge_coefficients,certificate
 
 def trial(seed,mode="greedy",budget=1510,delta=.05,threshold=.015,null=False,cyclic=False):
+    if not isinstance(budget,int) or budget<10:raise ValueError("budget must cover the 10-label pilot")
+    if not 0<delta<1:raise ValueError("delta")
     if mode not in ("greedy","joint_active","joint_mix","joint_gap"):raise ValueError("mode")
     k=5;b=np.ones(k)/k;qs=[]
     for a,c in [(0,1),(2,3)]:
@@ -82,3 +84,4 @@ if __name__=="__main__":
     p.add_argument("--cyclic",action="store_true")
     a=p.parse_args();r=audit(a.seeds,a.offset,cyclic=a.cyclic);f=Path(a.out);f.parent.mkdir(parents=True,exist_ok=True)
     f.write_text(json.dumps(r,indent=2));print(json.dumps({"summary":r["summary"],"paired_mcnemar_holm":r["paired_mcnemar_holm"]},indent=2))
+

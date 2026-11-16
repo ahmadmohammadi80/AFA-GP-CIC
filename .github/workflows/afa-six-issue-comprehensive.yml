@@ -21,6 +21,10 @@ jobs:
         run: python research/six_issues_20261116/support_pruning.py > support_pruning_witness.json
       - name: Run all unit tests
         run: python -m unittest discover -s research/six_issues_20261116 -p "test_*.py" -v
+      - name: Reproduce generic engine and corrected baseline evidence
+        run: python research/six_issues_20261116/repair_audit.py
+      - name: Current-time drift certificates in generic engine
+        run: python research/six_issues_20261116/drift_engine_audit.py
       - name: Registered independent 200-seed matched power and label cost
         run: python research/six_issues_20261116/extended_power.py --seeds 200 --out results/extended_power_200.json
       - name: Independent 200-seed true sign-cycle confirmation
@@ -57,3 +61,4 @@ jobs:
             results/*
             support_pruning_witness.json
           if-no-files-found: warn
+
