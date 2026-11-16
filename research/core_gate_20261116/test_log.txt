@@ -1,0 +1,9 @@
+test_embedding_and_kl (test_gate.CoreGateTests.test_embedding_and_kl) ... ok
+test_fixed_null_error_and_mass (test_gate.CoreGateTests.test_fixed_null_error_and_mass) ... ok
+test_forward_backward_and_rational (test_gate.CoreGateTests.test_forward_backward_and_rational) ... ok
+test_rule_matches_frozen_engine (test_gate.CoreGateTests.test_rule_matches_frozen_engine) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.884s
+
+OK

@@ -1,0 +1,1351 @@
+{
+  "setup": {
+    "budget": 24,
+    "delta": 0.05,
+    "tau": 0.015,
+    "shift": 0.12,
+    "prior": [
+      0.5,
+      0.5
+    ],
+    "period": 20,
+    "b": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "Q": [
+      [
+        0.21333333333333332,
+        0.4533333333333333,
+        0.3333333333333333
+      ],
+      [
+        0.21333333333333332,
+        0.3333333333333333,
+        0.4533333333333333
+      ]
+    ],
+    "kappa": 0.05,
+    "H": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "support_edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ]
+    ],
+    "pilot_labels": 2,
+    "frozen_base": "fa5b5b20ad8d7d9cf264d1c7e000b61c1afa6469"
+  },
+  "bayes": {
+    "greedy": {
+      "success_probability": 0.37333067315910284,
+      "expected_labels": 20.32120509944366,
+      "false_certificate_probability": null,
+      "terminal_mass": 1.0
+    },
+    "joint_mix": {
+      "success_probability": 0.34438481541042165,
+      "expected_labels": 21.22118632937054,
+      "false_certificate_probability": null,
+      "terminal_mass": 1.0
+    },
+    "bellman": {
+      "success_probability": 0.40306979090217965,
+      "expected_labels": 20.175135067747988,
+      "false_certificate_probability": null,
+      "terminal_mass": 1.0
+    }
+  },
+  "bellman_root_backward_check": 0.40306979090217976,
+  "dp_states": 18643,
+  "grid": [
+    {
+      "p": [
+        0.05,
+        0.05
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.9333737521185634,
+          "expected_labels": 15.133833414219605,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.999999999999999
+        },
+        "joint_mix": {
+          "success_probability": 0.8460244010059683,
+          "expected_labels": 17.30946735346499,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999987
+        },
+        "bellman": {
+          "success_probability": 0.9465626527315828,
+          "expected_labels": 14.999628400313744,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.999999999999999
+        }
+      }
+    },
+    {
+      "p": [
+        0.05,
+        0.2
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.8834350777235624,
+          "expected_labels": 15.704023705859129,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999994
+        },
+        "joint_mix": {
+          "success_probability": 0.7927905910677422,
+          "expected_labels": 18.00212762595249,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999994
+        },
+        "bellman": {
+          "success_probability": 0.7953228994011794,
+          "expected_labels": 18.176441431222315,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000002
+        }
+      }
+    },
+    {
+      "p": [
+        0.05,
+        0.4
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.8850167278705268,
+          "expected_labels": 15.757593283518997,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999984
+        },
+        "joint_mix": {
+          "success_probability": 0.7902023396892173,
+          "expected_labels": 18.244493850646695,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999967
+        },
+        "bellman": {
+          "success_probability": 0.8440178045251444,
+          "expected_labels": 17.41910240855269,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999992
+        }
+      }
+    },
+    {
+      "p": [
+        0.05,
+        0.5
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.8921083773198162,
+          "expected_labels": 15.731372943703054,
+          "false_certificate_probability": 5.5953502999305725e-05,
+          "terminal_mass": 0.9999999999999994
+        },
+        "joint_mix": {
+          "success_probability": 0.7944197119588842,
+          "expected_labels": 18.25952577058476,
+          "false_certificate_probability": 5.4701998394721026e-05,
+          "terminal_mass": 0.9999999999999994
+        },
+        "bellman": {
+          "success_probability": 0.8696987993079668,
+          "expected_labels": 16.929452952699737,
+          "false_certificate_probability": 0.0005350491813421249,
+          "terminal_mass": 0.9999999999999991
+        }
+      }
+    },
+    {
+      "p": [
+        0.05,
+        0.6
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.8988907728489943,
+          "expected_labels": 15.703826351120723,
+          "false_certificate_probability": 4.349854162200169e-06,
+          "terminal_mass": 0.9999999999999994
+        },
+        "joint_mix": {
+          "success_probability": 0.7985505424026406,
+          "expected_labels": 18.225563363472414,
+          "false_certificate_probability": 4.3290899592720436e-06,
+          "terminal_mass": 0.9999999999999996
+        },
+        "bellman": {
+          "success_probability": 0.8870232095516352,
+          "expected_labels": 16.54008315889103,
+          "false_certificate_probability": 4.343591006365552e-05,
+          "terminal_mass": 0.9999999999999996
+        }
+      }
+    },
+    {
+      "p": [
+        0.05,
+        0.8
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.9104812229095591,
+          "expected_labels": 15.65430553687673,
+          "false_certificate_probability": 2.0017104696335953e-09,
+          "terminal_mass": 0.9999999999999999
+        },
+        "joint_mix": {
+          "success_probability": 0.8055882420127929,
+          "expected_labels": 18.011978180964835,
+          "false_certificate_probability": 2.0016833248716355e-09,
+          "terminal_mass": 0.9999999999999983
+        },
+        "bellman": {
+          "success_probability": 0.9073882745104952,
+          "expected_labels": 15.989448553420361,
+          "false_certificate_probability": 2.0508807540490188e-08,
+          "terminal_mass": 0.9999999999999984
+        }
+      }
+    },
+    {
+      "p": [
+        0.05,
+        0.95
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.9173632689549751,
+          "expected_labels": 15.622905323421689,
+          "false_certificate_probability": 4.760755701707708e-16,
+          "terminal_mass": 0.9999999999999989
+        },
+        "joint_mix": {
+          "success_probability": 0.8097144275297201,
+          "expected_labels": 17.714055924697295,
+          "false_certificate_probability": 4.760774982904993e-16,
+          "terminal_mass": 0.9999999999999997
+        },
+        "bellman": {
+          "success_probability": 0.9168268612422218,
+          "expected_labels": 15.720054725068255,
+          "false_certificate_probability": 4.882820425739432e-15,
+          "terminal_mass": 0.9999999999999981
+        }
+      }
+    },
+    {
+      "p": [
+        0.2,
+        0.05
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.47992104896241916,
+          "expected_labels": 19.826714747857316,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000007
+        },
+        "joint_mix": {
+          "success_probability": 0.4191524790763919,
+          "expected_labels": 21.08306543837134,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999986
+        },
+        "bellman": {
+          "success_probability": 0.8329460123299355,
+          "expected_labels": 16.11224284523458,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999997
+        }
+      }
+    },
+    {
+      "p": [
+        0.2,
+        0.2
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.24526942987260414,
+          "expected_labels": 22.1366849953315,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 0.1902749795272653,
+          "expected_labels": 22.754819899673556,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000013
+        },
+        "bellman": {
+          "success_probability": 0.2788426977415396,
+          "expected_labels": 22.002130510163635,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.000000000000002
+        }
+      }
+    },
+    {
+      "p": [
+        0.2,
+        0.4
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.19301345436385642,
+          "expected_labels": 22.56694067917595,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000009
+        },
+        "joint_mix": {
+          "success_probability": 0.14412110484873927,
+          "expected_labels": 23.069474541737396,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999997
+        },
+        "bellman": {
+          "success_probability": 0.17547783936714134,
+          "expected_labels": 22.859087206347724,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000016
+        }
+      }
+    },
+    {
+      "p": [
+        0.2,
+        0.5
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.19407637504451677,
+          "expected_labels": 22.573568988057545,
+          "false_certificate_probability": 0.00020728129797363285,
+          "terminal_mass": 1.0000000000000007
+        },
+        "joint_mix": {
+          "success_probability": 0.14380448662977838,
+          "expected_labels": 23.08137560607245,
+          "false_certificate_probability": 0.00020277048409375007,
+          "terminal_mass": 1.000000000000001
+        },
+        "bellman": {
+          "success_probability": 0.18138702260117662,
+          "expected_labels": 22.802407405519737,
+          "false_certificate_probability": 0.0005619783935546876,
+          "terminal_mass": 1.0000000000000009
+        }
+      }
+    },
+    {
+      "p": [
+        0.2,
+        0.6
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.19631983540816167,
+          "expected_labels": 22.56766470265655,
+          "false_certificate_probability": 1.6077688663546276e-05,
+          "terminal_mass": 1.0000000000000009
+        },
+        "joint_mix": {
+          "success_probability": 0.14468735820135734,
+          "expected_labels": 23.075850434885705,
+          "false_certificate_probability": 1.6037144172272037e-05,
+          "terminal_mass": 1.0000000000000002
+        },
+        "bellman": {
+          "success_probability": 0.18801962261936334,
+          "expected_labels": 22.73324896836012,
+          "false_certificate_probability": 4.4281618768907496e-05,
+          "terminal_mass": 1.000000000000002
+        }
+      }
+    },
+    {
+      "p": [
+        0.2,
+        0.8
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.20044794145911946,
+          "expected_labels": 22.553725838166354,
+          "false_certificate_probability": 7.3913119801343824e-09,
+          "terminal_mass": 1.000000000000001
+        },
+        "joint_mix": {
+          "success_probability": 0.14647276832008693,
+          "expected_labels": 23.035645992384712,
+          "false_certificate_probability": 7.4119536600678234e-09,
+          "terminal_mass": 1.0000000000000024
+        },
+        "bellman": {
+          "success_probability": 0.19752320602314552,
+          "expected_labels": 22.62691611122265,
+          "false_certificate_probability": 2.0524861940039632e-08,
+          "terminal_mass": 1.0000000000000009
+        }
+      }
+    },
+    {
+      "p": [
+        0.2,
+        0.95
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.20292155868114067,
+          "expected_labels": 22.544614983792986,
+          "false_certificate_probability": 1.7578575331397465e-15,
+          "terminal_mass": 1.0000000000000016
+        },
+        "joint_mix": {
+          "success_probability": 0.1475282920708,
+          "expected_labels": 22.979551100527775,
+          "false_certificate_probability": 1.7628124130517758e-15,
+          "terminal_mass": 1.0000000000000018
+        },
+        "bellman": {
+          "success_probability": 0.20234661719442468,
+          "expected_labels": 22.57256103663161,
+          "false_certificate_probability": 4.882824835751352e-15,
+          "terminal_mass": 1.0
+        }
+      }
+    },
+    {
+      "p": [
+        0.4,
+        0.05
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.5448798537257489,
+          "expected_labels": 18.94225520479813,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999988
+        },
+        "joint_mix": {
+          "success_probability": 0.520711099349444,
+          "expected_labels": 20.468782612545205,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0
+        },
+        "bellman": {
+          "success_probability": 0.849924016403416,
+          "expected_labels": 16.145012303398882,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999997
+        }
+      }
+    },
+    {
+      "p": [
+        0.4,
+        0.2
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.11489609981559516,
+          "expected_labels": 23.11208479066489,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000009
+        },
+        "joint_mix": {
+          "success_probability": 0.09707663280339393,
+          "expected_labels": 23.419836557568566,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000007
+        },
+        "bellman": {
+          "success_probability": 0.17488270088427751,
+          "expected_labels": 22.679448253384702,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999992
+        }
+      }
+    },
+    {
+      "p": [
+        0.4,
+        0.4
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.008655298218349625,
+          "expected_labels": 23.91812368684107,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 0.9999999999999999
+        },
+        "joint_mix": {
+          "success_probability": 0.007880181876239139,
+          "expected_labels": 23.941812792153375,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000009
+        },
+        "bellman": {
+          "success_probability": 0.010227507092969056,
+          "expected_labels": 23.910676149005706,
+          "false_certificate_probability": 0.0,
+          "terminal_mass": 1.0000000000000002
+        }
+      }
+    },
+    {
+      "p": [
+        0.4,
+        0.5
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0057927907265137085,
+          "expected_labels": 23.94503307734485,
+          "false_certificate_probability": 0.0003705310725097656,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 0.005157125212244458,
+          "expected_labels": 23.961064967358347,
+          "false_certificate_probability": 0.0003724995901875,
+          "terminal_mass": 0.9999999999999997
+        },
+        "bellman": {
+          "success_probability": 0.0058460742418276835,
+          "expected_labels": 23.950023504681813,
+          "false_certificate_probability": 0.0005810727539062503,
+          "terminal_mass": 0.9999999999999996
+        }
+      }
+    },
+    {
+      "p": [
+        0.4,
+        0.6
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.005489662345366716,
+          "expected_labels": 23.94846634683906,
+          "false_certificate_probability": 2.8646689693971276e-05,
+          "terminal_mass": 1.0000000000000004
+        },
+        "joint_mix": {
+          "success_probability": 0.004835574126447029,
+          "expected_labels": 23.96354107058606,
+          "false_certificate_probability": 2.9508069093403544e-05,
+          "terminal_mass": 0.9999999999999994
+        },
+        "bellman": {
+          "success_probability": 0.005416147041908398,
+          "expected_labels": 23.953344627955282,
+          "false_certificate_probability": 4.4841396631282674e-05,
+          "terminal_mass": 0.9999999999999997
+        }
+      }
+    },
+    {
+      "p": [
+        0.4,
+        0.8
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.005526856270649923,
+          "expected_labels": 23.948525458372142,
+          "false_certificate_probability": 1.3152360910028766e-08,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 0.0048421899175244846,
+          "expected_labels": 23.96252313176448,
+          "false_certificate_probability": 1.3653355423334367e-08,
+          "terminal_mass": 1.0
+        },
+        "bellman": {
+          "success_probability": 0.005499464550627561,
+          "expected_labels": 23.95054962755877,
+          "false_certificate_probability": 2.0534715198996425e-08,
+          "terminal_mass": 1.0000000000000002
+        }
+      }
+    },
+    {
+      "p": [
+        0.4,
+        0.95
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0055659897421231706,
+          "expected_labels": 23.94835876421687,
+          "false_certificate_probability": 3.1278890689650364e-15,
+          "terminal_mass": 0.9999999999999998
+        },
+        "joint_mix": {
+          "success_probability": 0.004863334588478228,
+          "expected_labels": 23.960755508673632,
+          "false_certificate_probability": 3.247397554541047e-15,
+          "terminal_mass": 0.9999999999999997
+        },
+        "bellman": {
+          "success_probability": 0.005560871783357804,
+          "expected_labels": 23.948937435840147,
+          "false_certificate_probability": 4.882827521628619e-15,
+          "terminal_mass": 0.9999999999999999
+        }
+      }
+    },
+    {
+      "p": [
+        0.5,
+        0.05
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.6376390501747782,
+          "expected_labels": 18.09349144190597,
+          "false_certificate_probability": 0.00058005690574646,
+          "terminal_mass": 0.9999999999999997
+        },
+        "joint_mix": {
+          "success_probability": 0.6181276092148422,
+          "expected_labels": 19.83191802038534,
+          "false_certificate_probability": 0.0005580711364746092,
+          "terminal_mass": 0.9999999999999989
+        },
+        "bellman": {
+          "success_probability": 0.8661429837437155,
+          "expected_labels": 16.071431472467005,
+          "false_certificate_probability": 0.00017604921736388073,
+          "terminal_mass": 0.9999999999999984
+        }
+      }
+    },
+    {
+      "p": [
+        0.5,
+        0.2
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.13090588044821116,
+          "expected_labels": 23.006359316772137,
+          "false_certificate_probability": 0.0005846881866455077,
+          "terminal_mass": 1.0000000000000013
+        },
+        "joint_mix": {
+          "success_probability": 0.11086943777676266,
+          "expected_labels": 23.34658586547662,
+          "false_certificate_probability": 0.0005612182617187503,
+          "terminal_mass": 1.0000000000000009
+        },
+        "bellman": {
+          "success_probability": 0.17816738978284663,
+          "expected_labels": 22.683670635614167,
+          "false_certificate_probability": 0.00047941987497128924,
+          "terminal_mass": 1.0000000000000013
+        }
+      }
+    },
+    {
+      "p": [
+        0.5,
+        0.4
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.00445750405168434,
+          "expected_labels": 23.957174107800192,
+          "false_certificate_probability": 0.0005900955200195313,
+          "terminal_mass": 0.9999999999999998
+        },
+        "joint_mix": {
+          "success_probability": 0.004300538847485429,
+          "expected_labels": 23.96898857165647,
+          "false_certificate_probability": 0.00056488037109375,
+          "terminal_mass": 1.0000000000000004
+        },
+        "bellman": {
+          "success_probability": 0.005812490840428705,
+          "expected_labels": 23.945685271529147,
+          "false_certificate_probability": 0.0005754161756359376,
+          "terminal_mass": 0.9999999999999991
+        }
+      }
+    },
+    {
+      "p": [
+        0.5,
+        0.5
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0010284185409545898,
+          "expected_labels": 23.98905336856842,
+          "false_certificate_probability": 0.0010284185409545898,
+          "terminal_mass": 1.0
+        },
+        "joint_mix": {
+          "success_probability": 0.0010133981704711914,
+          "expected_labels": 23.991840839385986,
+          "false_certificate_probability": 0.0010133981704711914,
+          "terminal_mass": 1.0
+        },
+        "bellman": {
+          "success_probability": 0.0011729001998901367,
+          "expected_labels": 23.98825228214264,
+          "false_certificate_probability": 0.0011729001998901367,
+          "terminal_mass": 1.0
+        }
+      }
+    },
+    {
+      "p": [
+        0.5,
+        0.6
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0006282730037485906,
+          "expected_labels": 23.993260570350493,
+          "false_certificate_probability": 0.0006282730037485906,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 0.0006033829184665698,
+          "expected_labels": 23.995001604439256,
+          "false_certificate_probability": 0.0006033829184665698,
+          "terminal_mass": 0.9999999999999982
+        },
+        "bellman": {
+          "success_probability": 0.000637100277377005,
+          "expected_labels": 23.99370224588482,
+          "false_certificate_probability": 0.000637100277377005,
+          "terminal_mass": 1.0000000000000007
+        }
+      }
+    },
+    {
+      "p": [
+        0.5,
+        0.8
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0005982934846728582,
+          "expected_labels": 23.993621741960418,
+          "false_certificate_probability": 0.0005982934846728582,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 0.0005703899539044098,
+          "expected_labels": 23.995152749961182,
+          "false_certificate_probability": 0.0005703899539044098,
+          "terminal_mass": 0.9999999999999996
+        },
+        "bellman": {
+          "success_probability": 0.0005978913455306926,
+          "expected_labels": 23.993840256586907,
+          "false_certificate_probability": 0.0005978913455306926,
+          "terminal_mass": 1.0000000000000007
+        }
+      }
+    },
+    {
+      "p": [
+        0.5,
+        0.95
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0006004416942633152,
+          "expected_labels": 23.993611371517147,
+          "false_certificate_probability": 0.0006004416942633152,
+          "terminal_mass": 1.0
+        },
+        "joint_mix": {
+          "success_probability": 0.0005718040466347647,
+          "expected_labels": 23.994951365470854,
+          "false_certificate_probability": 0.0005718040466347647,
+          "terminal_mass": 0.9999999999999999
+        },
+        "bellman": {
+          "success_probability": 0.0006003921756852787,
+          "expected_labels": 23.993660900741084,
+          "false_certificate_probability": 0.0006003921756852787,
+          "terminal_mass": 0.9999999999999998
+        }
+      }
+    },
+    {
+      "p": [
+        0.6,
+        0.05
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.7195865104199619,
+          "expected_labels": 17.34972666107572,
+          "false_certificate_probability": 4.466534207352894e-05,
+          "terminal_mass": 0.9999999999999983
+        },
+        "joint_mix": {
+          "success_probability": 0.6994378797270902,
+          "expected_labels": 19.24815147590545,
+          "false_certificate_probability": 4.430033280040962e-05,
+          "terminal_mass": 0.9999999999999997
+        },
+        "bellman": {
+          "success_probability": 0.8791640980511352,
+          "expected_labels": 16.00158316755022,
+          "false_certificate_probability": 1.413194240790627e-05,
+          "terminal_mass": 0.9999999999999992
+        }
+      }
+    },
+    {
+      "p": [
+        0.6,
+        0.2
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.14838597401235948,
+          "expected_labels": 22.88598986418854,
+          "false_certificate_probability": 4.47962825696834e-05,
+          "terminal_mass": 1.000000000000001
+        },
+        "joint_mix": {
+          "success_probability": 0.12492353322803955,
+          "expected_labels": 23.256913489174593,
+          "false_certificate_probability": 4.440663324098564e-05,
+          "terminal_mass": 1.0000000000000002
+        },
+        "bellman": {
+          "success_probability": 0.1835100878282261,
+          "expected_labels": 22.668904877635587,
+          "false_certificate_probability": 3.7914109437945105e-05,
+          "terminal_mass": 1.0000000000000004
+        }
+      }
+    },
+    {
+      "p": [
+        0.6,
+        0.4
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.004414294453044101,
+          "expected_labels": 23.95837047151208,
+          "false_certificate_probability": 4.494895195822335e-05,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 0.004275667623819587,
+          "expected_labels": 23.969599083410085,
+          "false_certificate_probability": 4.4530328299110433e-05,
+          "terminal_mass": 1.0
+        },
+        "bellman": {
+          "success_probability": 0.005362158023250097,
+          "expected_labels": 23.95002711905427,
+          "false_certificate_probability": 4.443922348718743e-05,
+          "terminal_mass": 1.0000000000000002
+        }
+      }
+    },
+    {
+      "p": [
+        0.6,
+        0.5
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0005357340059206777,
+          "expected_labels": 23.99430559622536,
+          "false_certificate_probability": 0.0005357340059206777,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 0.0005509295521057899,
+          "expected_labels": 23.99565030946487,
+          "false_certificate_probability": 0.0005509295521057899,
+          "terminal_mass": 1.0
+        },
+        "bellman": {
+          "success_probability": 0.0006351267824123272,
+          "expected_labels": 23.99328066094226,
+          "false_certificate_probability": 0.0006351267824123272,
+          "terminal_mass": 1.0000000000000007
+        }
+      }
+    },
+    {
+      "p": [
+        0.6,
+        0.6
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 8.288588148512505e-05,
+          "expected_labels": 23.999054493634066,
+          "false_certificate_probability": 8.288588148512505e-05,
+          "terminal_mass": 1.0
+        },
+        "joint_mix": {
+          "success_probability": 8.480738278314613e-05,
+          "expected_labels": 23.999269466555923,
+          "false_certificate_probability": 8.480738278314613e-05,
+          "terminal_mass": 0.9999999999999991
+        },
+        "bellman": {
+          "success_probability": 9.014809998637044e-05,
+          "expected_labels": 23.999008154447118,
+          "false_certificate_probability": 9.014809998637044e-05,
+          "terminal_mass": 1.0000000000000004
+        }
+      }
+    },
+    {
+      "p": [
+        0.6,
+        0.8
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 4.519648240268113e-05,
+          "expected_labels": 23.999479431221708,
+          "false_certificate_probability": 4.519648240268113e-05,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 4.4734480110950856e-05,
+          "expected_labels": 23.999593829300494,
+          "false_certificate_probability": 4.4734480110950856e-05,
+          "terminal_mass": 0.9999999999999996
+        },
+        "bellman": {
+          "success_probability": 4.52235975066481e-05,
+          "expected_labels": 23.999495808979866,
+          "false_certificate_probability": 4.52235975066481e-05,
+          "terminal_mass": 1.0000000000000009
+        }
+      }
+    },
+    {
+      "p": [
+        0.6,
+        0.95
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 4.5239633493514196e-05,
+          "expected_labels": 23.999479296053003,
+          "false_certificate_probability": 4.5239633493514196e-05,
+          "terminal_mass": 0.9999999999999997
+        },
+        "joint_mix": {
+          "success_probability": 4.4764189272803966e-05,
+          "expected_labels": 23.999578595306833,
+          "false_certificate_probability": 4.4764189272803966e-05,
+          "terminal_mass": 1.0
+        },
+        "bellman": {
+          "success_probability": 4.5245689881545856e-05,
+          "expected_labels": 23.999482419672965,
+          "false_certificate_probability": 4.5245689881545856e-05,
+          "terminal_mass": 1.0
+        }
+      }
+    },
+    {
+      "p": [
+        0.8,
+        0.05
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.8366581921072488,
+          "expected_labels": 16.293328093477044,
+          "false_certificate_probability": 2.0528578089189323e-08,
+          "terminal_mass": 0.9999999999999998
+        },
+        "joint_mix": {
+          "success_probability": 0.7826426170547103,
+          "expected_labels": 18.344343003251645,
+          "false_certificate_probability": 2.052795924479994e-08,
+          "terminal_mass": 0.999999999999999
+        },
+        "bellman": {
+          "success_probability": 0.8997080803700338,
+          "expected_labels": 15.873877350514778,
+          "false_certificate_probability": 6.628749942087921e-09,
+          "terminal_mass": 1.0000000000000002
+        }
+      }
+    },
+    {
+      "p": [
+        0.8,
+        0.2
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.1757851826525032,
+          "expected_labels": 22.707670202476702,
+          "false_certificate_probability": 2.0530782552457166e-08,
+          "terminal_mass": 1.0000000000000004
+        },
+        "joint_mix": {
+          "success_probability": 0.14086319027730113,
+          "expected_labels": 23.104933937662576,
+          "false_certificate_probability": 2.0530121932799948e-08,
+          "terminal_mass": 1.0000000000000016
+        },
+        "bellman": {
+          "success_probability": 0.1935548501950698,
+          "expected_labels": 22.636517789144253,
+          "false_certificate_probability": 1.763052454989001e-08,
+          "terminal_mass": 1.0000000000000004
+        }
+      }
+    },
+    {
+      "p": [
+        0.8,
+        0.4
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.005084388771937662,
+          "expected_labels": 23.952377486865114,
+          "false_certificate_probability": 2.0533348258545615e-08,
+          "terminal_mass": 0.9999999999999999
+        },
+        "joint_mix": {
+          "success_probability": 0.00472143096536692,
+          "expected_labels": 23.96441512986586,
+          "false_certificate_probability": 2.0532638515199948e-08,
+          "terminal_mass": 0.999999999999999
+        },
+        "bellman": {
+          "success_probability": 0.00544924533737128,
+          "expected_labels": 23.949795318342083,
+          "false_certificate_probability": 2.038642791310945e-08,
+          "terminal_mass": 0.9999999999999998
+        }
+      }
+    },
+    {
+      "p": [
+        0.8,
+        0.5
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0005658917419905379,
+          "expected_labels": 23.994011446090035,
+          "false_certificate_probability": 0.0005658917419905379,
+          "terminal_mass": 0.9999999999999998
+        },
+        "joint_mix": {
+          "success_probability": 0.0005611683886145202,
+          "expected_labels": 23.995344771999083,
+          "false_certificate_probability": 0.0005611683886145202,
+          "terminal_mass": 0.9999999999999983
+        },
+        "bellman": {
+          "success_probability": 0.0005958532792848459,
+          "expected_labels": 23.993689530505385,
+          "false_certificate_probability": 0.0005958532792848459,
+          "terminal_mass": 1.0000000000000007
+        }
+      }
+    },
+    {
+      "p": [
+        0.8,
+        0.6
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 4.3435844749433524e-05,
+          "expected_labels": 23.999507516729754,
+          "false_certificate_probability": 4.3435844749433524e-05,
+          "terminal_mass": 0.9999999999999998
+        },
+        "joint_mix": {
+          "success_probability": 4.431369408169906e-05,
+          "expected_labels": 23.999607007546096,
+          "false_certificate_probability": 4.431369408169906e-05,
+          "terminal_mass": 1.0000000000000002
+        },
+        "bellman": {
+          "success_probability": 4.519013654521607e-05,
+          "expected_labels": 23.999481228795286,
+          "false_certificate_probability": 4.519013654521607e-05,
+          "terminal_mass": 0.9999999999999993
+        }
+      }
+    },
+    {
+      "p": [
+        0.8,
+        0.8
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 4.0420525113081756e-08,
+          "expected_labels": 23.999999520269512,
+          "false_certificate_probability": 4.0420525113081756e-08,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 4.097855249711094e-08,
+          "expected_labels": 23.999999615237524,
+          "false_certificate_probability": 4.097855249711094e-08,
+          "terminal_mass": 1.0
+        },
+        "bellman": {
+          "success_probability": 4.1076685520502686e-08,
+          "expected_labels": 23.99999951525588,
+          "false_certificate_probability": 4.1076685520502686e-08,
+          "terminal_mass": 1.0000000000000004
+        }
+      }
+    },
+    {
+      "p": [
+        0.8,
+        0.95
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 2.0538207235393756e-08,
+          "expected_labels": 23.999999753895015,
+          "false_certificate_probability": 2.0538207235393756e-08,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 2.053740129031227e-08,
+          "expected_labels": 23.99999979795657,
+          "false_certificate_probability": 2.053740129031227e-08,
+          "terminal_mass": 1.0000000000000002
+        },
+        "bellman": {
+          "success_probability": 2.053846994204158e-08,
+          "expected_labels": 23.99999975516731,
+          "false_certificate_probability": 2.053846994204158e-08,
+          "terminal_mass": 1.0000000000000004
+        }
+      }
+    },
+    {
+      "p": [
+        0.95,
+        0.05
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.8772294656907145,
+          "expected_labels": 15.909137070094976,
+          "false_certificate_probability": 4.882825760872164e-15,
+          "terminal_mass": 0.9999999999999991
+        },
+        "joint_mix": {
+          "success_probability": 0.8044364008766569,
+          "expected_labels": 17.822741015169225,
+          "false_certificate_probability": 4.882825760078478e-15,
+          "terminal_mass": 0.9999999999999991
+        },
+        "bellman": {
+          "success_probability": 0.9137551520279381,
+          "expected_labels": 15.765583547497023,
+          "false_certificate_probability": 1.5777759505384083e-15,
+          "terminal_mass": 0.9999999999999989
+        }
+      }
+    },
+    {
+      "p": [
+        0.95,
+        0.2
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.18797702017381537,
+          "expected_labels": 22.641334527728652,
+          "false_certificate_probability": 4.882826358879538e-15,
+          "terminal_mass": 1.0000000000000013
+        },
+        "joint_mix": {
+          "success_probability": 0.14617823992547574,
+          "expected_labels": 23.006554048547066,
+          "false_certificate_probability": 4.882826358032276e-15,
+          "terminal_mass": 1.0000000000000007
+        },
+        "bellman": {
+          "success_probability": 0.2007659789595918,
+          "expected_labels": 22.60881499415714,
+          "false_certificate_probability": 4.194956433737918e-15,
+          "terminal_mass": 1.0000000000000013
+        }
+      }
+    },
+    {
+      "p": [
+        0.95,
+        0.4
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.005334112236150612,
+          "expected_labels": 23.95002648162722,
+          "false_certificate_probability": 4.882827054743322e-15,
+          "terminal_mass": 1.0
+        },
+        "joint_mix": {
+          "success_probability": 0.004836268246624462,
+          "expected_labels": 23.96132237271884,
+          "false_certificate_probability": 4.8828270538330564e-15,
+          "terminal_mass": 0.9999999999999999
+        },
+        "bellman": {
+          "success_probability": 0.005540821754207094,
+          "expected_labels": 23.9492402094847,
+          "false_certificate_probability": 4.848105961232979e-15,
+          "terminal_mass": 1.0000000000000004
+        }
+      }
+    },
+    {
+      "p": [
+        0.95,
+        0.5
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 0.0005877803533021164,
+          "expected_labels": 23.99372249652193,
+          "false_certificate_probability": 0.0005877803533021164,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 0.0005699735482343131,
+          "expected_labels": 23.99499295268534,
+          "false_certificate_probability": 0.0005699735482343131,
+          "terminal_mass": 1.0000000000000009
+        },
+        "bellman": {
+          "success_probability": 0.0005995750192452576,
+          "expected_labels": 23.993652201604796,
+          "false_certificate_probability": 0.0005995750192452576,
+          "terminal_mass": 1.0
+        }
+      }
+    },
+    {
+      "p": [
+        0.95,
+        0.6
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 4.4876168897092427e-05,
+          "expected_labels": 23.99948435506945,
+          "false_certificate_probability": 4.4876168897092427e-05,
+          "terminal_mass": 1.0
+        },
+        "joint_mix": {
+          "success_probability": 4.470230327965614e-05,
+          "expected_labels": 23.99958034160734,
+          "false_certificate_probability": 4.470230327965614e-05,
+          "terminal_mass": 0.9999999999999999
+        },
+        "bellman": {
+          "success_probability": 4.523212379254295e-05,
+          "expected_labels": 23.999480186044284,
+          "false_certificate_probability": 4.523212379254295e-05,
+          "terminal_mass": 0.9999999999999996
+        }
+      }
+    },
+    {
+      "p": [
+        0.95,
+        0.8
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 2.0517514439466444e-08,
+          "expected_labels": 23.999999755373132,
+          "false_certificate_probability": 2.0517514439466444e-08,
+          "terminal_mass": 1.0000000000000002
+        },
+        "joint_mix": {
+          "success_probability": 2.0536098084888478e-08,
+          "expected_labels": 23.999999798255544,
+          "false_certificate_probability": 2.0536098084888478e-08,
+          "terminal_mass": 0.9999999999999997
+        },
+        "bellman": {
+          "success_probability": 2.053844695644869e-08,
+          "expected_labels": 23.99999975390429,
+          "false_certificate_probability": 2.053844695644869e-08,
+          "terminal_mass": 0.9999999999999996
+        }
+      }
+    },
+    {
+      "p": [
+        0.95,
+        0.95
+      ],
+      "methods": {
+        "greedy": {
+          "success_probability": 9.761972921337492e-15,
+          "expected_labels": 23.99999999999988,
+          "false_certificate_probability": 9.761972921337492e-15,
+          "terminal_mass": 0.9999999999999999
+        },
+        "joint_mix": {
+          "success_probability": 9.765645406496059e-15,
+          "expected_labels": 23.9999999999999,
+          "false_certificate_probability": 9.765645406496059e-15,
+          "terminal_mass": 0.9999999999999997
+        },
+        "bellman": {
+          "success_probability": 9.765656892861516e-15,
+          "expected_labels": 23.999999999999886,
+          "false_certificate_probability": 9.765656892861516e-15,
+          "terminal_mass": 0.9999999999999992
+        }
+      }
+    }
+  ],
+  "floating_point_tolerance": 1e-11,
+  "source_sha256": "72df88d70364f35cde8c43e761c9696afe46823fdbe4442030c7bffcc9dc0781",
+  "scope": "Exact enumeration in float64; Bayesian objective, fixed finite B; not an independent-novelty claim, not Sticky-TaS reproduction."
+}

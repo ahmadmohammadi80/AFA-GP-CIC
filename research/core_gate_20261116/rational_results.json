@@ -1,0 +1,17 @@
+{
+  "greedy": {
+    "rational": "3283851329151/8796093022208",
+    "decimal": 0.37333067315910284
+  },
+  "joint_mix": {
+    "rational": "1514620435893/4398046511104",
+    "decimal": 0.34438481541042165
+  },
+  "bellman": {
+    "rational": "7090878750435/17592186044416",
+    "decimal": 0.40306979090217965
+  },
+  "strict_bellman_advantage": true,
+  "strict_greedy_advantage": true,
+  "checked_acceptance_states": 324
+}
