@@ -17,6 +17,8 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m pip install numpy scipy matplotlib
+      - name: Exact influence-support reduction witness
+        run: python research/six_issues_20261116/support_pruning.py > support_pruning_witness.json
       - name: Run all unit tests
         run: python -m unittest discover -s research/six_issues_20261116 -p "test_*.py" -v
       - name: Registered independent 200-seed matched power and label cost
@@ -51,5 +53,7 @@ jobs:
         if: always()
         with:
           name: afa-six-issue-detailed-audit
-          path: results/*
+          path: |
+            results/*
+            support_pruning_witness.json
           if-no-files-found: warn
