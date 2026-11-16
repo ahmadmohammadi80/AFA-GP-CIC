@@ -3,6 +3,7 @@ import json,argparse,sys
 from pathlib import Path
 from itertools import combinations
 import numpy as np
+from scipy.stats import binomtest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"anytime_mixture_20261116"))
 from anytime_mixture import edge_cs,edge_coefficients,certificate
 
@@ -54,10 +55,23 @@ def audit(seeds=40,offset=20261116,budget=1510):
     summary={m:{"certified":sum(v["certified"] for v in rows),
                  "false_certificates":sum(v["false_certificate"] for v in rows),
                  "mean_labels":float(np.mean([v["labels"] for v in rows]))} for m,rows in out.items()}
-    return {"seeds":seeds,"offset":offset,"budget":budget,"summary":summary,"rows":out}
+    # Exact matched-pairs two-sided McNemar (binomial) tests, then Holm FWER.
+    tests={}
+    for m in ("joint_active","joint_mix","joint_gap"):
+        wins=sum(a["certified"] and not b["certified"] for a,b in zip(out[m],out["greedy"]))
+        losses=sum(b["certified"] and not a["certified"] for a,b in zip(out[m],out["greedy"]))
+        p=float(binomtest(min(wins,losses),wins+losses,p=.5,alternative="two-sided").pvalue) if wins+losses else 1.
+        tests[m]={"joint_only":wins,"greedy_only":losses,"exact_two_sided_p":p}
+    order=sorted(tests,key=lambda k:tests[k]["exact_two_sided_p"])
+    running=0.
+    for rank,m in enumerate(order):
+        running=max(running,min(1.,(len(order)-rank)*tests[m]["exact_two_sided_p"]))
+        tests[m]["holm_adjusted_p"]=running
+    return {"seeds":seeds,"offset":offset,"budget":budget,"summary":summary,
+            "paired_mcnemar_holm":tests,"rows":out}
 
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("--offset",type=int,default=20261116)
     p.add_argument("--seeds",type=int,default=40);p.add_argument("--out",default="results/issue1.json")
     a=p.parse_args();r=audit(a.seeds,a.offset);f=Path(a.out);f.parent.mkdir(parents=True,exist_ok=True)
-    f.write_text(json.dumps(r,indent=2));print(json.dumps(r["summary"],indent=2))
+    f.write_text(json.dumps(r,indent=2));print(json.dumps({"summary":r["summary"],"paired_mcnemar_holm":r["paired_mcnemar_holm"]},indent=2))
