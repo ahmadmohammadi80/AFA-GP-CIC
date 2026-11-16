@@ -71,7 +71,7 @@ def experiment(seeds=40,epochs=3,epoch_size=2500,delta=.05,threshold=.015,amp=.0
 if __name__=='__main__':
  import json,sys
  n=int(sys.argv[1]) if len(sys.argv)>1 else 40
- data=experiment(seeds=n)
+ data=experiment(seeds=n,epoch_size=10000)
  from pathlib import Path
  Path(__file__).with_name('drift40.json').write_text(json.dumps(data,indent=2))
  print(json.dumps({k:v for k,v in data.items() if k!='rows'},indent=2))
