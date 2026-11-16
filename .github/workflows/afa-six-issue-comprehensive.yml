@@ -1,0 +1,64 @@
+name: AFA six-issue comprehensive experimental package
+on:
+  push:
+    paths:
+      - ".github/workflows/afa-six-issue-comprehensive.yml"
+      - "research/six_issues_20261116/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  correctness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install numpy scipy matplotlib
+      - name: Exact influence-support reduction witness
+        run: python research/six_issues_20261116/support_pruning.py > support_pruning_witness.json
+      - name: Run all unit tests
+        run: python -m unittest discover -s research/six_issues_20261116 -p "test_*.py" -v
+      - name: Reproduce generic engine and corrected baseline evidence
+        run: python research/six_issues_20261116/repair_audit.py
+      - name: Current-time drift certificates in generic engine
+        run: python research/six_issues_20261116/drift_engine_audit.py
+      - name: Registered independent 200-seed matched power and label cost
+        run: python research/six_issues_20261116/extended_power.py --seeds 200 --out results/extended_power_200.json
+      - name: Independent 200-seed true sign-cycle confirmation
+        run: python research/six_issues_20261116/extended_power.py --seeds 200 --cyclic --out results/extended_power_200_cyclic.json
+      - name: Proof-bearing guarded method against strong greedy (new 200-seed holdout)
+        run: python research/six_issues_20261116/guarded_holdout.py --seeds 200 --out results/guarded_original_200.json
+      - name: Proof-bearing guarded method on sign-cycle (new 200-seed holdout)
+        run: python research/six_issues_20261116/guarded_holdout.py --seeds 200 --cyclic --out results/guarded_cyclic_200.json
+      - name: Globally adjusted Holm tests across 8 paired hypotheses
+        run: python research/six_issues_20261116/multiplicity_gate.py --root results --out results/global_200_holm.json
+      - name: Literature query policies on original 40 scenarios
+        run: python research/six_issues_20261116/published_baselines.py --seeds 40 --out results/published_original.json
+      - name: Genuine sign-cyclic paired 40-seed candidate ablations
+        run: python research/six_issues_20261116/issue1_ablation.py --seeds 40 --cyclic --out results/joint_true_cyclic.json
+      - name: PAC-Bayes-kl singleton anytime certification on 40 original scenarios
+        run: python research/six_issues_20261116/pac_bayes_iid.py --seeds 40 --out results/pac_bayes_original.json
+      - name: Literature query policies on sign-cyclic 40 scenarios
+        run: python research/six_issues_20261116/published_baselines.py --seeds 40 --cyclic --out results/published_cyclic.json
+      - name: Drift coverage on 40 adaptive paths
+        run: python research/six_issues_20261116/bounded_drift.py --seeds 40 --cycles 500 --out results/drift_coverage.json
+      - name: Three nonstationary regimes with known shifts and 40 paths
+        run: python research/six_issues_20261116/change_point_reset.py --seeds 40 --epochs 3 --out results/known_changes_40.json
+      - name: Proved guarded-policy performance and cyclic 2-world witness
+        run: python research/six_issues_20261116/theory_and_guarantees.py --seeds 40 --out results/guarantee.json
+      - name: Measure scaling and generate plot
+        run: python research/six_issues_20261116/pure_opponent_fast.py --out results/scaling.json
+      - name: Exact lookahead and KL frontier scaling profile
+        run: python research/six_issues_20261116/speed_lookahead.py --out results/lookahead_scaling.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afa-six-issue-detailed-audit
+          path: |
+            results/*
+            support_pruning_witness.json
+          if-no-files-found: warn
+
