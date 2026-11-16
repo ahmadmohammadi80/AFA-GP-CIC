@@ -57,3 +57,19 @@ CI evidence: [AFA certified algorithm and proof verification](https://github.com
 It passed 23 tests, 160 synthetic trials, 16 grid audits and 12 real-model questions.
 
 **Scope:** Results are for stationary, conditionally independent finite-action pairwise preferences with a known fixed reference policy. Numerical gaps are float64 checks, not formal directed-rounding certificates. Originality relative to all previous work and validity with human preferences remain separate unverified research questions.
+
+
+## 2026-11-16 verified numerical/finite-sample closure
+
+See [finite-action closure](research/verified_closure_20261116/README_FA.md)
+and [mathematical proof and limitations](research/verified_closure_20261116/PROOF_CLOSURE_FA.md).
+
+- Exact rationalized simplex witnesses and high-precision interval checks for
+  KL feasibility, primal lower bound, and dual upper bound; **fail-closed** API.
+- Non-implicit, sufficient per-action sample bound and conservative forced
+  exploration cost bound for stationary bounded comparisons.
+- CI: [30 regression tests passed on main](https://github.com/ahmadmohammadi80/AFA-GP-CIC/actions/runs/43855470942)
+  (23 prior and 7 new). This is an audit of the *finite-action stationary*
+  model and does not imply global originality or performance with human labels.
+- Assumes the interval arithmetic library correctly encloses transcendental
+  functions. This is not a separately machine-checked Lean/Coq proof.
