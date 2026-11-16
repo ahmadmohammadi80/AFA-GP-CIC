@@ -82,3 +82,13 @@ Existing related work includes:
 - Garivier and Kaufmann, Optimal Best Arm Identification with Fixed Confidence (2016), https://proceedings.mlr.press/v49/garivier16a.html
 
 Stronger anytime certificates and classical sequential tests are already known. A strongest unrestricted adaptive method can simulate our method exactly, so a **strict universal advantage over ALL equally informed adaptive methods is logically impossible**. A defensible originality claim needs a precisely scoped published competitor, an actual algorithmic difference not present in that prior work, and a rigorous rate/constant/computation advantage with equal information and permitted decisions. This stage repairs **statistical power** and proves a **limited information competitive ratio**; it does **NOT** settle global independent novelty.
+
+
+## Additional direct prior-art gate (verified 2026-11-16)
+
+The overlap is stronger than just Robust Nash:
+- Ramdas, Grünwald, Vovk and Shafer, "Game-Theoretic Statistics and Safe Anytime-Valid Inference" (2023/2024), https://www.imstat.org/publications/sts/sts_38_4/sts_38_4.pdf explicitly covers e-processes, test martingales and optional-stopping-safe confidence sequences.
+- Jun, "Confidence sequences via online learning with applications in offline contextual bandits and active preference learning" (2025 JSM), https://ww2.amstat.org/meetings/jsm/2025/onlineprogram/abstract.cfm?sid=2118&tid=2120 ties modern tight confidence sequences directly to active preference learning.
+- Nan et al., "Efficient Exploration for Iterative Nash Preference Optimization" (2026), https://arxiv.org/abs/2606.01382 already gives KL-sensitive exploratory Nash preference algorithms.
+
+Therefore even a **valid 34/40 vs 0/40 improvement** over the former Hoeffding baseline does not establish an algorithmic improvement over the best-published anytime-valid confidence sequence, ENPO, active preference optimization, or Robust Nash. The theorem of within-1.63 cost for the two-known-world benchmark is substantive and fully scoped, but the use of SPRT and change of measure is classical. Independent world-first novelty is still UNCONFIRMED and should not be automatically scored as complete. Next comparison must let strong published methods adapt edge choices and use tight confidence sequences.
