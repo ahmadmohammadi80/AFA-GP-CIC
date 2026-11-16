@@ -1,0 +1,31 @@
+name: AFA cycle-sensitive two-world theorem and test
+on:
+  push:
+    paths:
+      - '.github/workflows/afa-cycle-sensitive.yml'
+      - 'research/cycle_sensitive_20261116/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check analytic theorem and separation tests
+        run: |
+          cd research/cycle_sensitive_20261116
+          python -m unittest test_cycle_gap -v
+      - name: Reproduce empirical Monte Carlo
+        run: |
+          mkdir -p outputs
+          python research/cycle_sensitive_20261116/cycle_gap.py --trials 10000 --seed 20261116 --out outputs/cycle_gap.json
+      - name: Upload result JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: afa-cycle-sensitive-results
+          path: outputs/cycle_gap.json
