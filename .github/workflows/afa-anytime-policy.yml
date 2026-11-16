@@ -1,0 +1,24 @@
+name: AFA anytime policy selection
+on:
+  push:
+    paths:
+      - ".github/workflows/afa-anytime-policy.yml"
+      - "research/anytime_policy_20261116/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install numpy
+      - run: cd research/anytime_policy_20261116 && python -m unittest -v test_anytime_selection
+      - run: python research/anytime_policy_20261116/anytime_selection.py > anytime_result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: anytime-policy-smoke
+          path: anytime_result.json
