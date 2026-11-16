@@ -128,3 +128,43 @@ The fast and dense certificate values differed by at most 1.7e-16 in tests up to
 6. Issue 6, scaling: exact pure-opponent computational improvement with reproducible time/memory plots. Not a complete end-to-end profiling across general H and GPU models.
 
 No missing theorem, label-cost result, or literature comparator is to be silently filled with a fabricated success claim.
+
+
+## 11. Independent confirmation of the PROVED guarded variant (200 + 200 new seeds)
+
+This is NOT the same algorithm as the unguarded higher-power joint_mix: guarded_joint uses deterministic periodic edge coverage and split-delta intersected intervals so its sample/regret theorem applies to the actually executed rule. In each comparison both methods have the same observed-oracle opportunity, budget, KL constraints and full candidate/opponent information.
+
+| New, previously unused 200 seeds | GUARDED certificates | Greedy certificates | Exact paired two-sided p; Holm over success/label outcomes | Mean labels GUARDED vs greedy |
+|---|---:|---:|---:|---:|
+| Original family | 170/200 | 153/200 | .01150779; .01150779 | 1200.185 vs 1072.890 |
+| TRUE sign-cycle family | 183/200 | 170/200 | .04095959; .04095959 | 1175.705 vs 1019.830 |
+
+Across the four prespecified comparisons (success and label cost in the two regimes), an additional Holm adjustment gives approximately **0.02302** for noncyclic success and **0.04096** for sign-cyclic success. The matched label-cost outcome is statistically *worse* for guarded_joint, with 127.295 and 155.875 additional labels on average, respectively. Zero false-positive certificates and zero observed violations of the high-probability regret bound occurred in these 400 runs; this is not a proof of zero population risk.
+
+This simultaneously supplies a proved, executable finite-action algorithm with improved certification probability against the specified strong adaptive beta-mixture controller in two distributions. It does NOT show universal sample efficiency, global independent novelty or a minimax-optimal regret bound.
+
+Evidence: https://github.com/ahmadmohammadi80/AFA-GP-CIC/actions/runs/43897969275
+
+## 12. Valid adaptation at known change points — measured certification
+
+The 40-seed test with 3 KNOWN regimes alternates genuine sign-cyclic W+ and -W+ and restarts each pair's beta-mixture test martingale at the publicly specified boundary. With delta/(3E) per pair/epoch, simultaneous coverage over all 3 epochs and all query times follows by Ville + union bound. The algorithm re-selects the KL-feasible q after each shift, with no dependence on a fixed scalar reward.
+
+| Known regime | Positive certificates / 40 | Mean labels to certificate | Mean terminal edge-interval width |
+|---|---:|---:|---:|
+| 1 | 40/40 | 640.575 | 1.1013 |
+| 2 (preference sign reversed) | 40/40 | 662.050 | 1.0973 |
+| 3 (sign reversed again) | 40/40 | 672.400 | 1.0960 |
+
+There were 40/40 paths with simultaneous coverage across all epochs; 0 observed false positives. This is a **nonstationary finite known-change-point guarantee**, not a valid method for unknown or retrospectively discovered shift times.
+
+Evidence: https://github.com/ahmadmohammadi80/AFA-GP-CIC/actions/runs/43897331703
+
+## 13. One-step lookahead and KL-frontier implementation
+
+The old exact recourse implementation recomputed Q times H times E edge contributions for EACH of E candidate query edges and each of B+1 possible batch outcomes: O(Q H E^2 B) work. The optimized implementation precomputes existing edge contributions once and changes only the selected edge for each hypothetical label outcome: O(Q H E B+Q H E) work and O(Q H E) auxiliary data. Direct equality with the old recourse decisions is checked numerically; measured timings appear in CI scaling JSON/PNG.
+
+For the KL-feasible interpolation q=(1-eta)b+eta e_i, the constraint evaluation simplifies exactly to q_i log(q_i/b_i)+(1-q_i)log(1-eta). Each bisection evaluation is O(1) rather than O(K), while fully materializing the K frontier vectors remains O(K^2). The old generic numerical KL bisection and the new formula need not agree to machine epsilon because of finite tolerance; tests use absolute tolerance 1e-8, not a false exact-bitwise equality claim.
+
+## 14. Overall unresolved claims
+
+The executed guarded joint policy has a nontrivial validated *distribution-specific* certificate-power gain and formal correctness/sample-rate bounds; the dynamic and scaling extensions are real. The work is still not a paper-ready proof of algorithmic novelty relative to the strongest **same-objective** literature baseline, and the trade-off in required labels is unfavorable in all held-out comparisons. No universal dominance, unrestricted unknown-drift calibration, minimax matching or generalized infinite-action guarantee is established.
