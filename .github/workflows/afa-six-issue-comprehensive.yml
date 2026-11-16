@@ -43,6 +43,8 @@ jobs:
         run: python research/six_issues_20261116/theory_and_guarantees.py --seeds 40 --out results/guarantee.json
       - name: Measure scaling and generate plot
         run: python research/six_issues_20261116/pure_opponent_fast.py --out results/scaling.json
+      - name: Exact lookahead and KL frontier scaling profile
+        run: python research/six_issues_20261116/speed_lookahead.py --out results/lookahead_scaling.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
