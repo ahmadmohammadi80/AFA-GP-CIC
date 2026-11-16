@@ -7,7 +7,7 @@ from scipy.stats import binomtest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"anytime_mixture_20261116"))
 from anytime_mixture import edge_cs,edge_coefficients,certificate
 
-def trial(seed,mode="greedy",budget=1510,delta=.05,threshold=.015,null=False):
+def trial(seed,mode="greedy",budget=1510,delta=.05,threshold=.015,null=False,cyclic=False):
     if mode not in ("greedy","joint_active","joint_mix","joint_gap"):raise ValueError("mode")
     k=5;b=np.ones(k)/k;qs=[]
     for a,c in [(0,1),(2,3)]:
@@ -15,6 +15,9 @@ def trial(seed,mode="greedy",budget=1510,delta=.05,threshold=.015,null=False):
     H=np.eye(k);As=[edge_coefficients(b,q,H)[1] for q in qs]
     pot=np.array([.45,-.35,.25,-.15,-.20]);W=pot[:,None]-pot[None,:]
     for i,j in [(0,2),(2,3),(3,0)]:W[i,j]+=.04;W[j,i]-=.04
+    if cyclic:
+        W[2,4]=-.18;W[4,2]=.18
+        assert W[2,3]>0 and W[3,4]>0 and W[4,2]>0
     if null:W*=0
     es=list(combinations(range(k),2));E=len(es)
     mu=np.array([W[i,j] for i,j in es])
@@ -46,15 +49,18 @@ def trial(seed,mode="greedy",budget=1510,delta=.05,threshold=.015,null=False):
         lo[e],hi[e]=edge_cs(int(s[e]),int(n[e]),delta/E)
     return {"seed":seed,"labels":int(n.sum()),"certified":winner is not None,
             "false_certificate":bool(winner is not None and gains[winner]<=threshold),
-            "max_lower":float(max(certificate(A,lo,hi) for A in As))}
+            "max_lower":float(max(certificate(A,lo,hi) for A in As)),
+            "mean_cs_width":float(np.mean(hi-lo)),
+            "sign_cycle":bool(W[2,3]>0 and W[3,4]>0 and W[4,2]>0)}
 
-def audit(seeds=40,offset=20261116,budget=1510):
+def audit(seeds=40,offset=20261116,budget=1510,cyclic=False):
     modes=("greedy","joint_active","joint_mix","joint_gap");out={}
     for mode in modes:
-        out[mode]=[trial(offset+s,mode,budget) for s in range(seeds)]
+        out[mode]=[trial(offset+s,mode,budget,cyclic=cyclic) for s in range(seeds)]
     summary={m:{"certified":sum(v["certified"] for v in rows),
                  "false_certificates":sum(v["false_certificate"] for v in rows),
-                 "mean_labels":float(np.mean([v["labels"] for v in rows]))} for m,rows in out.items()}
+                 "mean_labels":float(np.mean([v["labels"] for v in rows])),
+                 "mean_cs_width":float(np.mean([v["mean_cs_width"] for v in rows]))} for m,rows in out.items()}
     # Exact matched-pairs two-sided McNemar (binomial) tests, then Holm FWER.
     tests={}
     for m in ("joint_active","joint_mix","joint_gap"):
@@ -67,11 +73,12 @@ def audit(seeds=40,offset=20261116,budget=1510):
     for rank,m in enumerate(order):
         running=max(running,min(1.,(len(order)-rank)*tests[m]["exact_two_sided_p"]))
         tests[m]["holm_adjusted_p"]=running
-    return {"seeds":seeds,"offset":offset,"budget":budget,"summary":summary,
+    return {"seeds":seeds,"offset":offset,"budget":budget,"cyclic":cyclic,"summary":summary,
             "paired_mcnemar_holm":tests,"rows":out}
 
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("--offset",type=int,default=20261116)
     p.add_argument("--seeds",type=int,default=40);p.add_argument("--out",default="results/issue1.json")
-    a=p.parse_args();r=audit(a.seeds,a.offset);f=Path(a.out);f.parent.mkdir(parents=True,exist_ok=True)
+    p.add_argument("--cyclic",action="store_true")
+    a=p.parse_args();r=audit(a.seeds,a.offset,cyclic=a.cyclic);f=Path(a.out);f.parent.mkdir(parents=True,exist_ok=True)
     f.write_text(json.dumps(r,indent=2));print(json.dumps({"summary":r["summary"],"paired_mcnemar_holm":r["paired_mcnemar_holm"]},indent=2))
