@@ -23,6 +23,10 @@ jobs:
         run: python research/six_issues_20261116/extended_power.py --seeds 200 --out results/extended_power_200.json
       - name: Independent 200-seed true sign-cycle confirmation
         run: python research/six_issues_20261116/extended_power.py --seeds 200 --cyclic --out results/extended_power_200_cyclic.json
+      - name: Proof-bearing guarded method against strong greedy (new 200-seed holdout)
+        run: python research/six_issues_20261116/guarded_holdout.py --seeds 200 --out results/guarded_original_200.json
+      - name: Proof-bearing guarded method on sign-cycle (new 200-seed holdout)
+        run: python research/six_issues_20261116/guarded_holdout.py --seeds 200 --cyclic --out results/guarded_cyclic_200.json
       - name: Literature query policies on original 40 scenarios
         run: python research/six_issues_20261116/published_baselines.py --seeds 40 --out results/published_original.json
       - name: Genuine sign-cyclic paired 40-seed candidate ablations
