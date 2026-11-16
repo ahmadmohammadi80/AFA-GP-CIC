@@ -73,6 +73,9 @@ def certificate(A,observations,N,delta):
 def run(trials=40,pilot=100,k=10,delta=.05,threshold=.02,seed=20261116):
     if k<5 or k>13 or pilot<1 or trials<1:raise ValueError("scenario")
     b=np.ones(k)/k;d=np.zeros(k);d[0]=.065;d[1]=-.065;d[2]=.015;d[3]=-.015;q=b+d
+    kappa=.10
+    policy_kl=float(np.sum(q*np.log(q/b)))
+    if policy_kl>kappa:raise AssertionError("candidate policy violates KL budget")
     H=np.eye(k)[:6]
     v=np.linspace(.12,-.10,k);v[0]=.40;v[1]=-.40
     W=v[:,None]-v[None,:]
@@ -107,6 +110,7 @@ def run(trials=40,pilot=100,k=10,delta=.05,threshold=.02,seed=20261116):
     valid=[r for r in rows if r['planned']]
     return {'model':'fixed KL candidate and opponent set, independent pilot and confirmation',
        'k':k,'opponent_count':len(H),'active_edges':len(E),'trial_count':trials,
+       'kappa':kappa,'policy_kl':policy_kl,
        'true_margins':(A@mu).tolist(),'threshold':threshold,'delta':delta,
        'planned_trials':len(valid),
        'our_certificates':sum(r['our_certified'] for r in valid),
