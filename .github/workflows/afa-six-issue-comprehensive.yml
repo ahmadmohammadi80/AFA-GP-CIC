@@ -1,0 +1,37 @@
+name: AFA six-issue comprehensive experimental package
+on:
+  push:
+    paths:
+      - ".github/workflows/afa-six-issue-comprehensive.yml"
+      - "research/six_issues_20261116/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  correctness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install numpy scipy matplotlib
+      - name: Run all unit tests
+        run: python -m unittest discover -s research/six_issues_20261116 -p "test_*.py" -v
+      - name: Literature query policies on original 40 scenarios
+        run: python research/six_issues_20261116/published_baselines.py --seeds 40 --out results/published_original.json
+      - name: Literature query policies on sign-cyclic 40 scenarios
+        run: python research/six_issues_20261116/published_baselines.py --seeds 40 --cyclic --out results/published_cyclic.json
+      - name: Drift coverage on 40 adaptive paths
+        run: python research/six_issues_20261116/bounded_drift.py --seeds 40 --cycles 500 --out results/drift_coverage.json
+      - name: Proved guarded-policy performance and cyclic 2-world witness
+        run: python research/six_issues_20261116/theory_and_guarantees.py --seeds 40 --out results/guarantee.json
+      - name: Measure scaling and generate plot
+        run: python research/six_issues_20261116/pure_opponent_fast.py --out results/scaling.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afa-six-issue-detailed-audit
+          path: results/*
+          if-no-files-found: warn
