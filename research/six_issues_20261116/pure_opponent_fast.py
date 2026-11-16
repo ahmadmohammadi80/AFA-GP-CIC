@@ -53,7 +53,7 @@ def run(seed=2026,k=10,q_count=5,repetitions=15):
             "measures":measures}
 
 def audit():
-    rows=[run(k=k,repetitions=(20 if k<=20 else 5)) for k in [5,10,20,40,80]]
+    rows=[run(k=k,repetitions=(12 if k<=10 else (4 if k<=20 else 1))) for k in [5,10,20,40]]
     return {"runs":rows,"scope":"pure opponents only; exact O(QK^2) rather than dense O(QK^3)"}
 
 if __name__=="__main__":
