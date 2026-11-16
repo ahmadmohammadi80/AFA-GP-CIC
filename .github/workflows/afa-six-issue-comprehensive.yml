@@ -27,6 +27,8 @@ jobs:
         run: python research/six_issues_20261116/guarded_holdout.py --seeds 200 --out results/guarded_original_200.json
       - name: Proof-bearing guarded method on sign-cycle (new 200-seed holdout)
         run: python research/six_issues_20261116/guarded_holdout.py --seeds 200 --cyclic --out results/guarded_cyclic_200.json
+      - name: Globally adjusted Holm tests across 8 paired hypotheses
+        run: python research/six_issues_20261116/multiplicity_gate.py --root results --out results/global_200_holm.json
       - name: Literature query policies on original 40 scenarios
         run: python research/six_issues_20261116/published_baselines.py --seeds 40 --out results/published_original.json
       - name: Genuine sign-cyclic paired 40-seed candidate ablations
