@@ -55,9 +55,10 @@ def replay(seed,mode="joint",budget=1510,block=50,delta=.05,threshold=.015):
     """Paired stationary-stream benchmark, identical q,H,W,b,delta,budget.
 
     'precommit' can reselect its q in the next round. 'joint' integrates
-    prospective q re-selection in its one-block edge score.
+    prospective q re-selection in its one-block edge score. 'greedy_batch'
+    has exactly the same block-size decision schedule as both VOI methods.
     """
-    if mode not in ("joint","precommit") or block<1 or budget<10:
+    if mode not in ("joint","precommit","greedy_batch") or block<1 or budget<10:
         raise ValueError("mode, block or budget")
     k=5;b=np.ones(k)/k
     q1=b.copy();q1[0]+=.08;q1[1]-=.08
@@ -85,9 +86,21 @@ def replay(seed,mode="joint",budget=1510,block=50,delta=.05,threshold=.015):
         remaining=budget-int(counts.sum())
         if remaining==0:break
         steps=min(block,remaining)
-        scan=one_step_scan(b,Q,H,wins,counts,delta,steps)
-        e=scan["best_joint_edge"] if mode=="joint" else scan["best_precommit_edge"]
-        wins[e]+=streams[e].binomial(steps,(1+true[e])/2);counts[e]+=steps
+        if mode=="greedy_batch":
+            # Same beta-mixture controller as greedy_online, but forced to
+            # select only once per block: same opportunities as the VOI arms.
+            A=AA[int(np.argmax(certs))]
+            center=(lo+hi)/2
+            worst=int(np.argmin(A@center-np.abs(A)@((hi-lo)/2)))
+            priority=np.abs(A[worst])*(hi-lo)/(np.sqrt(counts)+.2)
+            e=int(np.argmax(priority)) if priority.max()>0 else int(np.argmin(counts))
+        else:
+            scan=one_step_scan(b,Q,H,wins,counts,delta,steps)
+            e=scan["best_joint_edge"] if mode=="joint" else scan["best_precommit_edge"]
+        # Generate each Bernoulli observation separately. Unlike binomial(B,p),
+        # this ensures exactly identical per-edge RNG prefixes across block sizes.
+        wins[e]+=int(streams[e].binomial(1,(1+true[e])/2,size=steps).sum())
+        counts[e]+=steps
     true_gains=[float(min((q-b)@W@h for h in H)) for q in Q]
     return {"mode":mode,"labels":int(counts.sum()),"certified":winner is not None,
             "selected":winner,"false_positive":bool(winner is not None and true_gains[winner]<=threshold),
@@ -95,11 +108,11 @@ def replay(seed,mode="joint",budget=1510,block=50,delta=.05,threshold=.015):
 
 
 def experiment(seeds=40,budget=1510,block=50):
-    methods=["joint","precommit","greedy_online"]
+    methods=["joint","precommit","greedy_batch","greedy_online"]
     rows=[];summaries={}
     for s in range(seeds):
         seed=20261116+s
-        row={m:replay(seed,m,budget,block) for m in methods[:2]}
+        row={m:replay(seed,m,budget,block) for m in methods[:3]}
         baseline=strong_greedy(seed=seed,max_labels=budget,k=5,delta=.05,threshold=.015,mode="mixture")
         row["greedy_online"]={"labels":baseline["labels"],"certified":baseline["certified"],
                               "false_positive":baseline["certified"] and baseline["true_gain"]<=.015}
