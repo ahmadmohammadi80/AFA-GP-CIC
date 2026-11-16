@@ -1,0 +1,33 @@
+name: AFA joint policy/query recourse pilot
+on:
+  push:
+    paths:
+      - ".github/workflows/afa-postquery-recourse.yml"
+      - "research/postquery_recourse_20261116/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install numpy scipy
+      - name: Run independent recourse and safety tests
+        run: |
+          cd research/postquery_recourse_20261116
+          python -m unittest test_policy_query_recourse -v
+      - name: Paired synthetic comparison
+        run: |
+          python research/postquery_recourse_20261116/policy_query_recourse.py --seeds 40 --budget 1510 --block 50 --out results/postquery_recourse.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afa-postquery-recourse-audit
+          path: results/postquery_recourse.json
+          if-no-files-found: warn
