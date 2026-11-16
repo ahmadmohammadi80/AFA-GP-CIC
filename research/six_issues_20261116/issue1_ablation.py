@@ -34,7 +34,7 @@ def trial(seed,mode="greedy",budget=1510,delta=.05,threshold=.015,null=False):
         P=np.array(priority)
         if mode=="greedy":scores=P[top]
         elif mode=="joint_active":
-            plausible=[i for i in range(len(qs)) if lower[i]+2*(np.abs(As[i])@half)>=lower[top]]
+            plausible=[i for i in range(len(qs)) if lower[i]+2*float(np.max(np.abs(As[i])@half))>=lower[top]]
             scores=np.max(P[plausible],axis=0)
         elif mode=="joint_mix":scores=.7*P[top]+.3*np.max(P,axis=0)
         else:
