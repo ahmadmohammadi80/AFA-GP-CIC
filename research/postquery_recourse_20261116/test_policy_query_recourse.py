@@ -20,18 +20,36 @@ class JointPolicyQuery(unittest.TestCase):
 
     def test_no_fake_global_sample_advantage(self):
         r=experiment(seeds=8,budget=1510,block=50)
-        for method in ["joint","precommit","greedy_online"]:
+        for method in ["joint","precommit","greedy_batch","greedy_online"]:
             self.assertEqual(r['methods'][method]['false_certificates'],0)
         self.assertEqual(len(r['rows']),8)
         self.assertLessEqual(r['methods']['joint']['certificates'],8)
 
     def test_replay_determinism_and_kl(self):
-        for method in ("joint","precommit"):
+        for method in ("joint","precommit","greedy_batch"):
             a=replay(543,method,budget=310,block=50)
             b=replay(543,method,budget=310,block=50)
             self.assertEqual(a,b)
             self.assertLessEqual(max(a['KL']),.05)
             self.assertLessEqual(a['labels'],310)
+
+    def test_counterfactual_per_edge_prefix_is_identical(self):
+        import numpy as np
+        for p in (0.1,0.5,0.9):
+            indiv=np.random.default_rng(745)
+            batch=np.random.default_rng(745)
+            a=sum(int(indiv.binomial(1,p)) for _ in range(50))
+            b=int(batch.binomial(1,p,size=50).sum())
+            self.assertEqual(a,b)
+            # Important: next prefix must also agree, not only the first batch.
+            self.assertEqual(int(indiv.binomial(1,p)),int(batch.binomial(1,p)))
+
+    def test_equal_clock_greedy_is_a_fair_third_arm(self):
+        for method in ("joint","precommit","greedy_batch"):
+            r=replay(20261116,method,budget=310,block=50)
+            self.assertGreaterEqual(r['labels'],10)
+            self.assertLessEqual(r['labels'],310)
+            self.assertFalse(r['false_positive'])
 
     def test_invalid_inputs(self):
         b=np.array([.5,.5]);q=np.array([[.7,.3],[.3,.7]])
