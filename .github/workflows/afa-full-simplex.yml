@@ -1,0 +1,43 @@
+name: AFA full-simplex verification and real-LM pilot
+on:
+  push:
+    paths:
+      - '.github/workflows/afa-full-simplex.yml'
+      - 'research/full_simplex_20261116/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy scipy 'transformers>=4.47,<5' huggingface_hub
+      - name: Verify finite-action separation tests
+        run: python -m unittest discover -s research/full_simplex_20261116/tests -v
+      - name: Reproduce 160 synthetic runs
+        run: |
+          mkdir -p outputs
+          python research/full_simplex_20261116/strong_adaptive_study.py --ks 6 12 24 48 --n 5000 --seeds 40 --out outputs/cyclic_study.json
+      - name: Evaluate pretrained SmolLM2 weights with programmatic preference oracle
+        env:
+          HF_HUB_DISABLE_TELEMETRY: '1'
+        run: |
+          python research/full_simplex_20261116/real_llm_pilot.py --n 5000 --out outputs/real_llm.json
+          python research/full_simplex_20261116/paired_analysis.py outputs/real_llm.json outputs/paired_analysis.json
+      - name: Upload reproducible results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afa-full-simplex-20261116
+          path: outputs/*.json
+          if-no-files-found: warn

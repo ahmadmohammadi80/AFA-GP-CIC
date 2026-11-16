@@ -19,3 +19,23 @@ The complete 2026-11-16 reviewer-evidence archive (raw JSON results and prior-ar
 See `docs/` for the detailed theory and experimental limitations.
 
 Copyright (c) 2026 Ahmad Mohammadi. No open-source license granted.
+
+## 2026-11-16: KL-constrained full-simplex certificate extension
+
+Latest source, finite-action separation proof, real-model pilot, tests and scientific caveats are in
+[\`research/full_simplex_20261116/\`](research/full_simplex_20261116/README_FA.md).
+
+This extension proves separation from **single-transfer policy classes**, not from arbitrary unrestricted adaptive methods. The pretrained-LM pilot uses **real model logits but simulated, programmatic preference labels**, not human feedback. Earlier CA-VOI sources and tests remain unchanged.
+
+Reproduce the new stage:
+
+\`\`\`bash
+python -m pip install numpy scipy
+python -m unittest discover -s research/full_simplex_20261116/tests -v
+python research/full_simplex_20261116/strong_adaptive_study.py --ks 6 12 24 48 --n 5000 --seeds 40 --out cyclic_study.json
+# On a machine with internet access to Hugging Face weights:
+python -m pip install torch 'transformers>=4.47,<5' huggingface_hub
+python research/full_simplex_20261116/real_llm_pilot.py --n 5000 --out real_llm.json
+\`\`\`
+
+The workflow \`AFA full-simplex verification and real-LM pilot\` runs the checks on GitHub Actions and saves raw experimental JSON as a run artifact.
