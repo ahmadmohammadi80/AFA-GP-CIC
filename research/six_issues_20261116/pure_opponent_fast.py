@@ -59,4 +59,18 @@ def audit():
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("--out",default="results/scale_pure.json")
     a=p.parse_args();r=audit();dest=Path(a.out);dest.parent.mkdir(parents=True,exist_ok=True)
-    dest.write_text(json.dumps(r,indent=2));print(json.dumps(r,indent=2))
+    dest.write_text(json.dumps(r,indent=2))
+    # Measured scaling plot; values and hardware provenance accompany the PNG.
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    ks=[z["k"] for z in r["runs"]]
+    for m in ("dense","pure_fast"):
+        plt.plot(ks,[1000*z["measures"][m]["seconds_per_call"] for z in r["runs"]],
+                 marker="o",label=m)
+    plt.xlabel("Number of actions K")
+    plt.ylabel("Measured milliseconds per certificate")
+    plt.yscale("log");plt.legend();plt.tight_layout()
+    plt.savefig(dest.with_suffix(".png"),dpi=180)
+    plt.close()
+    print(json.dumps(r,indent=2))
