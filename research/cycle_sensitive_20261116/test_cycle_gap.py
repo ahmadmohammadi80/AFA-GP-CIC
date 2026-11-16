@@ -3,7 +3,7 @@ import math
 import unittest
 from cycle_gap import (matrix,score,kl,gains,margin,binary_kl,
                        plus_witness,no_world_upper_bound,min_q0,
-                       needed_labels,predict_from_labels,run_trials,
+                       needed_labels,predict_from_labels,run_trials,universal_adaptive_lower_bound,
                        THRESHOLD,B,KAPPA)
 
 class ProofChecks(unittest.TestCase):
@@ -62,6 +62,17 @@ class ProofChecks(unittest.TestCase):
         self.assertEqual(predict_from_labels(38,38),1)
         self.assertEqual(predict_from_labels(0,38),-1)
         with self.assertRaises(ValueError):predict_from_labels(0,0)
+
+
+    def test_information_theoretic_adaptive_lower_bound(self):
+        v=universal_adaptive_lower_bound(.05)
+        self.assertAlmostEqual(v['adaptive_lower_expected_plus'],6.93882192847592,places=9)
+        self.assertAlmostEqual(v['adaptive_lower_expected_minus'],7.47881775697708,places=9)
+        self.assertLess(v['fixed_38_to_optimal_lower_ratio_plus'],5.5)
+        self.assertLess(v['fixed_38_to_optimal_lower_ratio_minus'],5.5)
+        for delta in [.05,.01,.001]:
+            bounds=universal_adaptive_lower_bound(delta)
+            self.assertGreater(needed_labels(delta),max(bounds['adaptive_lower_expected_plus'],bounds['adaptive_lower_expected_minus']))
 
     def test_reproducible_monte_carlo(self):
         a=run_trials(2000,seed=101)
