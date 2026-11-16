@@ -1,0 +1,49 @@
+name: AFA certified algorithm and proof verification
+on:
+  push:
+    paths:
+      - '.github/workflows/afa-certified-proof.yml'
+      - 'research/certified_completion_20261116/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  certified:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install scientific dependencies and real pretrained model backend
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy scipy 'transformers>=4.47,<5' huggingface_hub
+      - name: Verify all theorem and implementation regression tests
+        run: |
+          cd research/certified_completion_20261116
+          python -m unittest discover -s tests -v
+      - name: Reproduce 160 finite-action study trials
+        run: |
+          mkdir -p outputs
+          python research/certified_completion_20261116/strong_adaptive_study.py --ks 6 12 24 48 --n 5000 --seeds 40 --out outputs/cyclic_study_certified.json
+      - name: Verify 16 independent exhaustive-grid checks
+        run: |
+          cd research/certified_completion_20261116
+          python independent_grid_audit.py
+          cp independent_grid_audit.json ../../outputs/independent_grid_audit.json
+      - name: Re-evaluate actual SmolLM2 weights with synthetic preference labels
+        env:
+          HF_HUB_DISABLE_TELEMETRY: '1'
+        run: |
+          python research/certified_completion_20261116/real_llm_pilot.py --n 5000 --out outputs/real_llm_certified.json
+      - name: Upload raw verification data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afa-certified-proof-20261116
+          path: outputs/*.json
+          if-no-files-found: warn
