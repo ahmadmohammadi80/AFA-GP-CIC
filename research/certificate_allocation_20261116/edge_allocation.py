@@ -39,14 +39,17 @@ def design(A,B):
     if np.any(np.max(W,axis=0)<=0):raise ValueError("inactive edges")
     E=W.shape[1]
     uniform=max((sum(row)/bi)**2 for row,bi in zip(W,B))
-    x0=np.full(E,np.log(max(uniform*1.01,1e-6)))
-    cons=[{'type':'ineq','fun':lambda x,w=w,t=t:float(t-np.sum(w*np.exp(-.5*x))),
+    # Scale by the fully informed uniform feasible count to condition the NLP.
+    scale=max(float(uniform),1e-10)
+    x0=np.zeros(E)
+    normalized=W/(B[:,None]*np.sqrt(scale))
+    cons=[{'type':'ineq','fun':lambda x,w=w:float(1-np.sum(w*np.exp(-.5*x))),
            'jac':lambda x,w=w:.5*w*np.exp(-.5*x)}
-          for w,t in zip(W,B)]
+          for w in normalized]
     opt=minimize(lambda x:float(np.exp(x).sum()),x0,
-         jac=lambda x:np.exp(x),bounds=[(-20,25)]*E,constraints=cons,
-         method='SLSQP',options={'maxiter':1500,'ftol':1e-10})
-    n=np.exp(opt.x) if np.all(np.isfinite(opt.x)) else np.full(E,uniform*1.01)
+         jac=lambda x:np.exp(x),bounds=[(-18,18)]*E,constraints=cons,
+         method='SLSQP',options={'maxiter':1500,'ftol':1e-11})
+    n=scale*np.exp(opt.x) if np.all(np.isfinite(opt.x)) else np.full(E,uniform*1.01)
     if np.max(W@np.power(n,-.5)-B)>1e-7:
         n=np.full(E,uniform*1.01)
     if n.sum()>E*uniform*1.01:n=np.full(E,uniform*1.01)
