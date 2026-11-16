@@ -1,0 +1,35 @@
+name: AFA real language-model pilot
+on:
+  push:
+    paths:
+      - '.github/workflows/afa-real-llm.yml'
+      - 'research/real_llm_pilot.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install CPU PyTorch and scientific dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install 'transformers>=4.47,<5' numpy scipy huggingface_hub
+      - name: Load real pretrained model and run preference pilot
+        env:
+          HF_HUB_DISABLE_TELEMETRY: '1'
+        run: |
+          python research/real_llm_pilot.py --out outputs/real_llm.json --n 5000
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afa-real-model-pilot
+          path: outputs/real_llm.json
+          if-no-files-found: warn
