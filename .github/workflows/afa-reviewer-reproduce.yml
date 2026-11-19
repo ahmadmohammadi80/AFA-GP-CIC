@@ -1,0 +1,38 @@
+name: AFA reviewer reproduction (frozen benchmark)
+on:
+  pull_request:
+    branches:
+      - research/complete-six-issue-package-20261116
+    paths:
+      - 'reviewer/**'
+      - '.github/workflows/afa-reviewer-reproduce.yml'
+  workflow_dispatch:
+  push:
+    branches:
+      - 'reviewer/reproducibility-package-20261119'
+    paths:
+      - 'reviewer/**'
+      - '.github/workflows/afa-reviewer-reproduce.yml'
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install --no-cache-dir -r reviewer/requirements.txt
+      - name: Run nine tests, four benchmark suites, and check all 360 rows
+        run: python reviewer/run.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afa-reviewer-scientific-replay
+          path: |
+            results/reviewer/online_*_3methods.json
+            results/reviewer/environment.json
+            results/reviewer/replay_report.json
+          retention-days: 90
