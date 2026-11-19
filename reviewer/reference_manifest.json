@@ -1,0 +1,106 @@
+{
+  "reference_run": "https://github.com/ahmadmohammadi80/AFA-GP-CIC/actions/runs/44360746204",
+  "reference_commit": "a272853858c256ccfd2804b03ae632a9fb58ec15",
+  "frozen_source_commit": "498be2bc14b7efa5f88d6f0ff7cae31fba9f3395",
+  "projection_fields": [
+    "seed",
+    "method",
+    "certified",
+    "false_certificate",
+    "labels",
+    "steps",
+    "winner",
+    "coverage_breached",
+    "planner_calls",
+    "positive_plans",
+    "root_overrides",
+    "online_decisions",
+    "query_counts"
+  ],
+  "datasets": {
+    "online_primary40_3methods.json": {
+      "protocol": {
+        "offset": 20261116,
+        "seeds": 40,
+        "budget": 1510,
+        "gate": 0.0005,
+        "cyclic": false,
+        "null": false
+      },
+      "certified": {
+        "greedy": 34,
+        "joint_mix": 38,
+        "afa_gated_two_step": 34
+      },
+      "mean_labels": {
+        "greedy": 1046.55,
+        "joint_mix": 1115.025,
+        "afa_gated_two_step": 1047.15
+      },
+      "scientific_rows_sha256": "e03626c64dc256bf76308cea42b1d3b73033091620c040cb96c4cc8ea77045f8"
+    },
+    "online_holdout40_3methods.json": {
+      "protocol": {
+        "offset": 20270101,
+        "seeds": 40,
+        "budget": 1510,
+        "gate": 0.0005,
+        "cyclic": false,
+        "null": false
+      },
+      "certified": {
+        "greedy": 34,
+        "joint_mix": 37,
+        "afa_gated_two_step": 34
+      },
+      "mean_labels": {
+        "greedy": 1051.9,
+        "joint_mix": 1103.725,
+        "afa_gated_two_step": 1049.55
+      },
+      "scientific_rows_sha256": "016e97c15f179ed5566e8cd1e448865b9919a8af0af6d8cd5e06ad1d267443a1"
+    },
+    "online_cyclic20_3methods.json": {
+      "protocol": {
+        "offset": 20261116,
+        "seeds": 20,
+        "budget": 1510,
+        "gate": 0.0005,
+        "cyclic": true,
+        "null": false
+      },
+      "certified": {
+        "greedy": 18,
+        "joint_mix": 20,
+        "afa_gated_two_step": 18
+      },
+      "mean_labels": {
+        "greedy": 996.8,
+        "joint_mix": 1075.3,
+        "afa_gated_two_step": 998.45
+      },
+      "scientific_rows_sha256": "37542ded70058a89bc615ae6764a7a37bc746e196d7b6b5a7780b0752d5c317f"
+    },
+    "online_null20_3methods.json": {
+      "protocol": {
+        "offset": 20261116,
+        "seeds": 20,
+        "budget": 1510,
+        "gate": 0.0005,
+        "cyclic": false,
+        "null": true
+      },
+      "certified": {
+        "greedy": 0,
+        "joint_mix": 0,
+        "afa_gated_two_step": 0
+      },
+      "mean_labels": {
+        "greedy": 1510,
+        "joint_mix": 1510,
+        "afa_gated_two_step": 1510
+      },
+      "scientific_rows_sha256": "60f697434e35a9d26162cb75ea7171cc32c9d828fc39f300ebc86361bd4e1bdf"
+    }
+  }
+}
