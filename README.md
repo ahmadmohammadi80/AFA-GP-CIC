@@ -1,5 +1,9 @@
 # AFA-GP-CIC / CA-VOI
 
+> **Editors and reviewers — frozen AFA-GP-CIC two-query paper:**
+> [Reproduce all 360 synthetic benchmark records from a clean environment](https://github.com/ahmadmohammadi80/AFA-GP-CIC/blob/research/complete-six-issue-package-20261116/reviewer/README.md) on the frozen research branch. The [reviewer reproducibility CI run](https://github.com/ahmadmohammadi80/AFA-GP-CIC/actions/runs/44579293827) passed. The default `main` branch is **not** the submission's experiment snapshot.
+
+
 **Private research prototype**: certificate-aware active preference learning for finite-response alignment under possibly cyclic preferences.
 
 The algorithm couples (i) KL-constrained policy-candidate selection, (ii) active pairwise comparison selection based on certificate-aware value of information, and (iii) anytime-valid acceptance/rejection of candidates. It does not assume Bradley–Terry or scalar rewards.
